@@ -223,6 +223,8 @@ Version1.0.0 は
 
 □ Package確認済み
 
+□ インストーラー (.exe) 動作確認済み (パッケージ配置 ＆ プロジェクト作成)
+
 □ Examples確認済み
 
 □ Learning確認済み

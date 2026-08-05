@@ -69,6 +69,8 @@ Typst_Starter/
 
 ├── learning/
 
+├── installer/
+
 ├── scripts/
 
 ├── assets/
@@ -139,6 +141,16 @@ README用画像。
 比較画像。
 
 スクリーンショット。
+
+---
+
+## installer/
+
+クロスプラットフォーム対応の単一バイナリインストーラー (Go製)。
+
+GitHub Release 配布用。
+
+ダブルクリック実行により、ローカルパッケージのコピー配置および作業ディレクトリ (project-template) の初期生成を自動実行する。
 
 ---
 

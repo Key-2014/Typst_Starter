@@ -212,15 +212,23 @@ Typst Starter Package
 
 ---
 
+## インストーラー
+
+GitHub Release からダウンロード可能な単一バイナリインストーラー（.exe / 各OS用バイナリ）。
+
+以下を自動実行する。
+
+- パッケージの自動インストール（`%APPDATA%\typst\packages\local\starter\1.0.0`）
+- 新規プロジェクト（`project-template`）のフォルダ初期化・生成
+
+---
+
 # 7. 提供しないもの
 
 Version 1.0.0 では以下は対象外とする。
 
-- GUI インストーラー
-- Linux 対応
-- macOS 対応
-- GitHub Actions 自動生成
 - 自動アップデート機能
+- クラウド同期機能
 
 ---
 
@@ -228,35 +236,28 @@ Version 1.0.0 では以下は対象外とする。
 
 利用者は以下の流れで利用する。
 
-README を読む
+GitHub Release から `Typst-Starter-Setup.exe` をダウンロードする
 
 ↓
 
-Typst をインストールする
+`Typst-Starter-Setup.exe` をダブルクリックで実行する
+（パッケージ配置とプロジェクトフォルダ生成が自動で行われる）
 
 ↓
 
-VSCode を導入する
+Typst / VSCode を導入する（未導入の場合）
 
 ↓
 
-推奨拡張機能を導入する
+推奨拡張機能（Tinymist）を導入する
 
 ↓
 
-必要に応じて Harano Aji フォントを導入する
+生成されたプロジェクトフォルダを VSCode で開き、最初のレポートを書く
 
 ↓
 
-Typst Starter Package を導入する
-
-↓
-
-Project Template を利用して最初のレポートを書く
-
-↓
-
-公式ドキュメントを利用しながら学習する
+公式ドキュメントや Learning 教材を利用しながら学習する
 
 ---
 

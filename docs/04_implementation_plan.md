@@ -67,6 +67,30 @@ Starter Package の骨組みを構築する。
 
 ---
 
+# Phase 1.5
+## Installer 実装 (Go)
+
+### 目的
+
+GitHub Release からダウンロード・ダブルクリック実行でインストール完了する単一バイナリ (.exe / 各OSバイナリ) を作成する。
+
+---
+
+### 作業内容
+
+- `installer/main.go`: パッケージ自動配置・プロジェクトフォルダ生成処理
+- `installer/embed.go`: `package` および `project-template` の埋め込み
+- `installer/build.ps1`: クロスコンパイルビルドスクリプト (dist/ 出力)
+
+---
+
+### 完了条件
+
+- `dist/Typst-Starter-Setup-windows-amd64.exe` が生成される
+- ダブルクリック実行でパッケージ配置とプロジェクトフォルダ初期作成が完了する
+
+---
+
 # Phase 2
 ## Project Template
 

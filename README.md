@@ -139,38 +139,58 @@ typst fonts | Select-String "Harano"
 
 ---
 
-## 9. Starter Package 導入
+## 9. Starter Package 導入（ワンクリック・インストーラー）
 
-### GitHub Releases からインストール
+### ① GitHub Releases からインストーラーをダウンロード
 
-1. [Releases ページ](https://github.com/Key-2014/Typst_Starter/releases) から最新のパッケージをダウンロード
-2. ダウンロードしたファイルを以下のディレクトリに配置：
+1. [Releases ページ](https://github.com/Key-2014/Typst_Starter/releases) から最新の **`Typst-Starter-Setup-windows-amd64.exe`** をダウンロードします。
+2. ダウンロードした `.exe` ファイルを**ダブルクリックで実行**します。
+
+これだけで、以下の 2 つが自動的に完了します：
+1. **Package の自動配置**: `%APPDATA%\typst\packages\local\starter\1.0.0\` へインストールされます。
+2. **作業フォルダの自動作成**: 実行場所に新規レポートプロジェクトフォルダ（`My_Typst_Report`）が作成されます。
+
+> 💡 インストール時、追加の環境構築やコマンド操作は一切不要です。
+> macOS や Linux をご利用の場合は、Release ページの対応バイナリ（`Typst-Starter-Setup-darwin-arm64` や `Typst-Starter-Setup-linux-amd64`）をご利用ください。
+
+### ② その他のインストール方法（スクリプト・手動）
+
+#### PowerShell スクリプトを使用する場合
+リポジトリを取得後、以下を実行してパッケージ配置およびプロジェクト初期化を行えます：
+
+```powershell
+.\scripts\install-package.ps1 -CreateProject
+```
+
+#### 手動配置の場合
+`package/starter/1.0.0/` フォルダを手動で以下のディレクトリに配置してください：
 
 ```
 %APPDATA%\typst\packages\local\starter\1.0.0\
 ```
 
-> 💡 `%APPDATA%` は通常 `C:\Users\<ユーザー名>\AppData\Roaming` です。
-
 ### インストール確認
 
-新しい `.typ` ファイルを作成し、以下を記述してエラーが出なければ成功です：
+VSCode で作成された `My_Typst_Report/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
 
 ```typ
 #import "@local/starter:1.0.0": *
 ```
 
+
 ---
 
 ## 10. 最初のレポート
 
-Package が導入できたら、以下の手順で最初のレポートを作成します。
+インストーラー（または `project-template` のコピー）によって作成されたプロジェクトフォルダで、以下の手順で最初のレポートを作成します。
 
-### 1. Project Template をコピー
+### 1. VSCode でプロジェクトフォルダを開く
 
-`project-template/` フォルダの内容を新しいフォルダにコピーします。
+作成された `My_Typst_Report` フォルダを VSCode で開きます（ドラッグ＆ドロップまたは「フォルダを開く」）。
 
 ### 2. main.typ を編集
+
+`main.typ` を開き、内容を編集します：
 
 ```typ
 #import "@local/starter:1.0.0": *
@@ -187,6 +207,7 @@ Package が導入できたら、以下の手順で最初のレポートを作成
 
 ここに本文を書いてください。
 ```
+
 
 ### 3. PDF をプレビュー
 

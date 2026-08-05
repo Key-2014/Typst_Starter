@@ -36,8 +36,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - **Learning** (`learning/`)
   - `01_minimal` 〜 `08_slide_template` — 段階的学習教材（8ファイル）
 
+- **Single-binary Installer** (`installer/`, `dist/`)
+  - Go製クロスプラットフォーム単一バイナリインストーラー (`Typst-Starter-Setup-windows-amd64.exe` 等) の追加
+  - ダブルクリックによるローカルパッケージ自動配置 (`%APPDATA%\typst\packages\local\starter\1.0.0`)
+  - 新規プロジェクト (`project-template`) の自動フォルダ生成機能
+  - リソース埋め込み (`go:embed`) とクロスコンパイル用ビルドスクリプト (`installer/build.ps1`)
+
 - **Scripts** (`scripts/`)
-  - `install-package.ps1` — ローカルパッケージインストーラー
+  - `install-package.ps1` に `-CreateProject` スイッチを追加（CLIでのパッケージ配置 ＋ プロジェクト初期化対応）
 
 - **Documentation**
   - README.md（16章構成の導入ガイド）
