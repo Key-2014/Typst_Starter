@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.1.1] - 2026-08-06
+
+### Changed
+
+- **Single-binary Installer / Scripts**
+  - 初回プロジェクトの作成場所をカレントディレクトリ（`Downloads`等）からユーザーのホームディレクトリ（`C:\Users\{username}\`）直下に変更
+  - 生成される初期プロジェクトのデフォルトフォルダ名を `My_Typst_Report` から `My_Typst` に変更
+  - ドキュメント (`README.md`) の作成パスおよびチュートリアル手順の表記を更新
+
+---
+
 ## [1.1.0] - 2026-08-05
 
 ### Added

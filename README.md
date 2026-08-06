@@ -148,7 +148,7 @@ typst fonts | Select-String "Harano"
 
 これだけで、以下の 2 つが自動的に完了します：
 1. **Package の自動配置**: `%APPDATA%\typst\packages\local\starter\1.0.0\` へインストールされます。
-2. **作業フォルダの自動作成**: 実行場所に新規レポートプロジェクトフォルダ（`My_Typst_Report`）が作成されます。
+2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（`C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
 
 > 💡 インストール時、追加の環境構築やコマンド操作は一切不要です。
 > macOS や Linux をご利用の場合は、Release ページの対応バイナリ（`Typst-Starter-Setup-darwin-arm64` や `Typst-Starter-Setup-linux-amd64`）をご利用ください。
@@ -171,7 +171,7 @@ typst fonts | Select-String "Harano"
 
 ### インストール確認
 
-VSCode で作成された `My_Typst_Report/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
+VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
 
 ```typ
 #import "@local/starter:1.0.0": *
@@ -186,7 +186,7 @@ VSCode で作成された `My_Typst_Report/main.typ` を開くか、新しい `.
 
 ### 1. VSCode でプロジェクトフォルダを開く
 
-作成された `My_Typst_Report` フォルダを VSCode で開きます（ドラッグ＆ドロップまたは「フォルダを開く」）。
+作成された `My_Typst` フォルダを VSCode で開きます（ドラッグ＆ドロップまたは「フォルダを開く」）。
 
 ### 2. main.typ を編集
 

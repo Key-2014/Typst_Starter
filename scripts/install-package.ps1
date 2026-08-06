@@ -1,6 +1,6 @@
 param (
     [switch]$CreateProject,
-    [string]$ProjectName = "My_Typst_Report"
+    [string]$ProjectName = "My_Typst"
 )
 
 $ErrorActionPreference = "Stop"
@@ -32,10 +32,11 @@ Write-Host "[OK] Package installed to: $TypstDataDir" -ForegroundColor Green
 
 # 2. プロジェクト初期化 (オプション)
 if ($CreateProject) {
-    $TargetProjectDir = Join-Path (Get-Location) $ProjectName
+    $BaseDir = if ($env:USERPROFILE) { $env:USERPROFILE } else { Get-Location }
+    $TargetProjectDir = Join-Path $BaseDir $ProjectName
     $counter = 1
     while (Test-Path $TargetProjectDir) {
-        $TargetProjectDir = Join-Path (Get-Location) "${ProjectName}_$counter"
+        $TargetProjectDir = Join-Path $BaseDir "${ProjectName}_$counter"
         $counter++
     }
     

@@ -35,7 +35,7 @@ func main() {
 	fmt.Println()
 
 	// 2. プロジェクト作成先の決定
-	defaultProjectName := "My_Typst_Report"
+	defaultProjectName := "My_Typst"
 	targetProjectDir := getTargetProjectDir(defaultProjectName)
 
 	fmt.Printf("[2/2] Creating initial project...\n")
@@ -87,16 +87,19 @@ func getTypstPackageDir() (string, error) {
 	return filepath.Join(home, ".local", "share", "typst", "packages", "local", "starter", "1.0.0"), nil
 }
 
-// 作業用プロジェクトの出力先パスを決定します
+// 作業用プロジェクトの出力先パスを決定します（ユーザーホーム直下に作成）
 func getTargetProjectDir(defaultName string) string {
-	currentDir, err := os.Getwd()
-	if err != nil {
-		currentDir = "."
+	baseDir, err := os.UserHomeDir()
+	if err != nil || baseDir == "" {
+		baseDir, err = os.Getwd()
+		if err != nil {
+			baseDir = "."
+		}
 	}
 
 	// 重複を避けるフォルダ名の決定
 	projectName := defaultName
-	targetPath := filepath.Join(currentDir, projectName)
+	targetPath := filepath.Join(baseDir, projectName)
 	counter := 1
 
 	for {
@@ -104,7 +107,7 @@ func getTargetProjectDir(defaultName string) string {
 			break
 		}
 		projectName = fmt.Sprintf("%s_%d", defaultName, counter)
-		targetPath = filepath.Join(currentDir, projectName)
+		targetPath = filepath.Join(baseDir, projectName)
 		counter++
 	}
 
