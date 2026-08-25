@@ -24,24 +24,25 @@ Typst 公式ドキュメントは非常に充実しているため、細かい�
 
 ## 2. 特徴
 
+- 🚀 **ワンクリック自動セットアップ** — インストーラーを実行するだけでパッケージ配置と作業フォルダ作成が完了
 - 🇯🇵 **日本語最適化** — 原ノ味明朝フォント優先、フォールバック設定付き
-- 📐 **A4 レポートテンプレート** — ページ設定・見出し・数式ナンバリングを自動適用
-- 🖥️ **スライドテンプレート** — Touying フレームワークによる 16:9 スライド
-- 🧮 **数学・物理パッケージ同梱** — physica, unify, cetz, showybox, whalogen
+- 📐 **A4 レポートテンプレート** — ページ設定・見出し・数式ナンバリング・図表キャプションを自動適用
+- 🖥️ **スライドテンプレート** — Touying フレームワーク（university theme）による 16:9 スライド
+- 🧮 **充実のパッケージ同梱** — 数学・物理・化学・作図・定理環境（physica, unify, cetz, fletcher, showybox, theorion, whalogen 等）を一元管理
 - 📖 **段階的学習教材** — Typst の設定方法を 01→08 の順に学べる
-- 📝 **最小構成のテンプレート** — コピーするだけでレポートを書き始められる
+- 📝 **実用的なテンプレート** — すぐにレポートや論文・スライドを書き始められる構成
 
 ---
 
 ## 3. 必要環境
 
-| 項目     | 要件                                 |
-| -------- | ------------------------------------ |
-| OS       | Windows 10 / 11                      |
-| Typst    | 最新安定版                           |
-| エディタ | Visual Studio Code（推奨）           |
-| 拡張機能 | Tinymist Typst, vscode-pdf           |
-| フォント | 原ノ味フォント（推奨・必須ではない） |
+| 項目     | 要件                                 | 備考                                   |
+| -------- | ------------------------------------ | -------------------------------------- |
+| OS       | Windows 10 / 11（macOS / Linux 対応）| 各OS向けインストーラーを提供           |
+| Typst    | 最新安定版                           | CLIツール                              |
+| エディタ | Visual Studio Code（推奨）           |                                        |
+| 拡張機能 | Tinymist Typst, vscode-pdf           | VSCode 拡張機能                        |
+| フォント | 原ノ味フォント（推奨・必須ではない） | システムフォントへの自動フォールバック |
 
 ---
 
@@ -141,33 +142,43 @@ typst fonts | Select-String "Harano"
 
 ## 9. Starter Package 導入（ワンクリック・インストーラー）
 
-### ① GitHub Releases からインストーラーをダウンロード
+Starter Package（`@local/starter:1.0.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
 
-1. [Releases ページ](https://github.com/Key-2014/Typst_Starter/releases) から最新の **`Typst-Starter-Setup-windows-amd64.exe`** をダウンロードします。
-2. ダウンロードした `.exe` ファイルを**ダブルクリックで実行**します。
+### ① GitHub Releases からインストーラーをダウンロード（推奨）
+
+1. [Releases ページ](https://github.com/Key-2014/Typst_Starter/releases) からお使いの環境に合った最新のインストーラーをダウンロードします：
+   - **Windows**: `Typst-Starter-Setup-windows-amd64.exe`
+   - **macOS (Apple Silicon)**: `Typst-Starter-Setup-darwin-arm64`
+   - **macOS (Intel)**: `Typst-Starter-Setup-darwin-amd64`
+   - **Linux**: `Typst-Starter-Setup-linux-amd64`
+2. ダウンロードした実行ファイルを起動します（Windows では**ダブルクリックで実行**）。
 
 これだけで、以下の 2 つが自動的に完了します：
-1. **Package の自動配置**: `%APPDATA%\typst\packages\local\starter\1.0.0\` へインストールされます。
-2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（`C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
+1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\1.0.0\`）へパッケージ一式が自動コピーされます。
+2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（Windows: `C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
 
-> 💡 インストール時、追加の環境構築やコマンド操作は一切不要です。
-> macOS や Linux をご利用の場合は、Release ページの対応バイナリ（`Typst-Starter-Setup-darwin-arm64` や `Typst-Starter-Setup-linux-amd64`）をご利用ください。
+> 💡 **追加の環境構築やコマンド操作は不要です。**
+> インストーラー完了後、すぐに `#import "@local/starter:1.0.0": *` が利用可能になります。
+> macOS / Linux で実行する場合は、ターミナルで実行権限を付与して実行してください：
+> ```bash
+> chmod +x Typst-Starter-Setup-*
+> ./Typst-Starter-Setup-*
+> ```
 
 ### ② その他のインストール方法（スクリプト・手動）
 
 #### PowerShell スクリプトを使用する場合
-リポジトリを取得後、以下を実行してパッケージ配置およびプロジェクト初期化を行えます：
+リポジトリをクローンまたはダウンロード後、PowerShell で以下を実行してパッケージ配置およびプロジェクト初期化を行えます：
 
 ```powershell
 .\scripts\install-package.ps1 -CreateProject
 ```
 
 #### 手動配置の場合
-`package/starter/1.0.0/` フォルダを手動で以下のディレクトリに配置してください：
+`package/starter/1.0.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
 
-```
-%APPDATA%\typst\packages\local\starter\1.0.0\
-```
+- **Windows**: `%APPDATA%\typst\packages\local\starter\1.0.0\`
+- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/1.0.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/1.0.0/`）
 
 ### インストール確認
 
@@ -177,16 +188,15 @@ VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` �
 #import "@local/starter:1.0.0": *
 ```
 
-
 ---
 
 ## 10. 最初のレポート
 
-インストーラー（または `project-template` のコピー）によって作成されたプロジェクトフォルダで、以下の手順で最初のレポートを作成します。
+インストーラー（またはスクリプト）によって自動作成されたプロジェクトフォルダで、以下の手順ですぐに最初のレポートを作成できます。
 
 ### 1. VSCode でプロジェクトフォルダを開く
 
-作成された `My_Typst` フォルダを VSCode で開きます（ドラッグ＆ドロップまたは「フォルダを開く」）。
+作成された `My_Typst` フォルダ（`C:\Users\{username}\My_Typst`）を VSCode で開きます（ドラッグ＆ドロップまたはメニューの「フォルダを開く」）。
 
 ### 2. main.typ を編集
 
@@ -208,17 +218,16 @@ VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` �
 ここに本文を書いてください。
 ```
 
-
 ### 3. PDF をプレビュー
 
 VSCode で `main.typ` を開くと、Tinymist が自動的にプレビューを表示します。
-`Ctrl + K V` でサイドにプレビューパネルを開くこともできます。
+`Ctrl + K V`（macOS は `Cmd + K V`）でサイドにプレビューパネルを開くこともできます。
 
 ---
 
 ## 11. Project Template
 
-`project-template/` は新規プロジェクトの開始用テンプレートです。
+`project-template/` は新規プロジェクトの開始用テンプレートです（インストーラー実行時に `My_Typst` として自動展開されます）。
 
 ```
 project-template/
@@ -230,7 +239,7 @@ project-template/
 └── .gitignore          ← PDF 除外設定
 ```
 
-このフォルダをコピーするだけでレポートを書き始められます。
+既存のテンプレートを複製して新しいレポートを作成したい場合は、このフォルダをコピーするだけでいつでも新しいプロジェクトを開始できます。
 詳細は [project-template/README.md](project-template/README.md) を参照してください。
 
 ---

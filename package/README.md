@@ -9,8 +9,10 @@ Typst Starter のローカルパッケージです。
 
 ## 概要
 
-`package/starter/1.0.0/` は Typst のローカルパッケージとしてインストールされ、
-利用者のドキュメントから `#import "@local/starter:1.0.0": *` で読み込まれます。
+`package/starter/1.0.0/` は Typst のローカルパッケージ（`@local/starter:1.0.0`）の実体です。
+
+- **一般的な利用者**: リリースされているインストーラー（`Typst-Starter-Setup-*.exe` 等）を実行するだけで、Typst のローカルパッケージフォルダ（`%APPDATA%\typst\packages\local\starter\1.0.0\`）へ自動配置されます。
+- **ドキュメントでの利用**: 利用者の `.typ` ファイルから `#import "@local/starter:1.0.0": *` の 1 行で読み込まれます。
 
 ---
 
