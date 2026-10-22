@@ -11,11 +11,11 @@ Typst Starter は、Windows 環境において Typst を初めて利用する人
 Typst Starter は、以下の 3 層構造で構成されています。
 
 ```
-Package      ← レポート・スライド作成に必要なテンプレート
+Package      ← レポート・論文・スライド作成に必要なテンプレート
     ↓
-Examples     ← Package の利用例
+Examples     ← Package の利用例（01〜07）
     ↓
-Learning     ← Typst の設定方法を学ぶ教材
+Learning     ← Typst の設定方法を学ぶ教材（01〜09）
 ```
 
 Typst 公式ドキュメントは非常に充実しているため、細かい説明はそちらを参照してください。
@@ -25,11 +25,12 @@ Typst 公式ドキュメントは非常に充実しているため、細かい�
 ## 2. 特徴
 
 - 🚀 **ワンクリック自動セットアップ** — インストーラーを実行するだけでパッケージ配置と作業フォルダ作成が完了
-- 🇯🇵 **日本語最適化** — 原ノ味明朝フォント優先、フォールバック設定付き
+- 🇯🇵 **日本語最適化** — 原ノ味明朝・原ノ味角ゴシックフォント優先、フォールバック設定付き
 - 📐 **A4 レポートテンプレート** — ページ設定・見出し・数式ナンバリング・図表キャプションを自動適用
-- 🖥️ **スライドテンプレート** — Touying フレームワーク（university theme）による 16:9 スライド
+- 🎓 **学位論文テンプレート (`thesis`)** — 卒業論文・修士論文向けに表紙・要旨・図表目次・章連動採番 `(1.1)`・ランニングヘッダー・付録モードを完備
+- 🖥️ **スライドテンプレート (`slide`)** — Touying フレームワーク（university theme）による 16:9 スライド
 - 🧮 **充実のパッケージ同梱** — 数学・物理・化学・作図・定理環境（physica, unify, cetz, fletcher, showybox, theorion, whalogen 等）を一元管理
-- 📖 **段階的学習教材** — Typst の設定方法を 01→08 の順に学べる
+- 📖 **段階的学習教材** — Typst の設定方法を 01→09 の順に学べる
 - 📝 **実用的なテンプレート** — すぐにレポートや論文・スライドを書き始められる構成
 
 ---
@@ -142,7 +143,7 @@ typst fonts | Select-String "Harano"
 
 ## 9. Starter Package 導入（ワンクリック・インストーラー）
 
-Starter Package（`@local/starter:1.0.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
+Starter Package（`@local/starter:2.0.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
 
 ### ① GitHub Releases からインストーラーをダウンロード（推奨）
 
@@ -154,11 +155,11 @@ Starter Package（`@local/starter:1.0.0`）は、**インストーラーを実�
 2. ダウンロードした実行ファイルを起動します（Windows では**ダブルクリックで実行**）。
 
 これだけで、以下の 2 つが自動的に完了します：
-1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\1.0.0\`）へパッケージ一式が自動コピーされます。
+1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.0.0\`）へパッケージ一式が自動コピーされます。
 2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（Windows: `C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
 
 > 💡 **追加の環境構築やコマンド操作は不要です。**
-> インストーラー完了後、すぐに `#import "@local/starter:1.0.0": *` が利用可能になります。
+> インストーラー完了後、すぐに `#import "@local/starter:2.0.0": *` が利用可能になります。
 > macOS / Linux で実行する場合は、ターミナルで実行権限を付与して実行してください：
 > ```bash
 > chmod +x Typst-Starter-Setup-*
@@ -171,21 +172,25 @@ Starter Package（`@local/starter:1.0.0`）は、**インストーラーを実�
 リポジトリをクローンまたはダウンロード後、PowerShell で以下を実行してパッケージ配置およびプロジェクト初期化を行えます：
 
 ```powershell
+# レポート用プロジェクトを作成する場合
 .\scripts\install-package.ps1 -CreateProject
+
+# 学位論文（卒論・修論）用プロジェクトを作成する場合
+.\scripts\install-package.ps1 -CreateProject -TemplateType thesis
 ```
 
 #### 手動配置の場合
-`package/starter/1.0.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
+`package/starter/2.0.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
 
-- **Windows**: `%APPDATA%\typst\packages\local\starter\1.0.0\`
-- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/1.0.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/1.0.0/`）
+- **Windows**: `%APPDATA%\typst\packages\local\starter\2.0.0\`
+- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/2.0.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/2.0.0/`）
 
 ### インストール確認
 
 VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
 
 ```typ
-#import "@local/starter:1.0.0": *
+#import "@local/starter:2.0.0": *
 ```
 
 ---
@@ -203,7 +208,7 @@ VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` �
 `main.typ` を開き、内容を編集します：
 
 ```typ
-#import "@local/starter:1.0.0": *
+#import "@local/starter:2.0.0": *
 
 #show: report.with(
   title: "物理学実験レポート",
@@ -248,14 +253,15 @@ project-template/
 
 `examples/` には Package の利用例が含まれています。
 
-| Example           | 内容                 |
-| ----------------- | -------------------- |
-| `01_First_Report` | 最も基本的なレポート |
-| `02_Image`        | 画像の挿入方法       |
-| `03_Table`        | 表の作成方法         |
-| `04_Equation`     | 数式の記述と番号付け |
-| `05_Bibliography` | 参考文献の引用       |
-| `06_Slide`        | スライドの作成       |
+| Example           | 内容                           |
+| ----------------- | ------------------------------ |
+| `01_First_Report` | 最も基本的なレポート           |
+| `02_Image`        | 画像の挿入方法                 |
+| `03_Table`        | 表の作成方法                   |
+| `04_Equation`     | 数式の記述と番号付け           |
+| `05_Bibliography` | 参考文献の引用                 |
+| `06_Slide`        | スライドの作成                 |
+| `07_Thesis`       | 学位論文（卒論・修論）の作成例 |
 
 各 Example は独立してコンパイル可能です。コピーして利用しても構いません。
 詳細は [examples/README.md](examples/README.md) を参照してください。
@@ -268,18 +274,19 @@ project-template/
 
 **Package を使いません。** 純粋な Typst のコードのみで書かれています。
 
-01→08 の順に読むことで、Starter が内部で行っている設定を段階的に学べます。
+01→09 の順に読むことで、Starter が内部で行っている設定を段階的に学べます。
 
-| ファイル                 | 学習内容                   |
-| ------------------------ | -------------------------- |
-| `01_minimal.typ`         | 最小のドキュメント         |
-| `02_page.typ`            | ページ設定                 |
-| `03_text.typ`            | フォント設定               |
-| `04_heading.typ`         | 見出し設定                 |
-| `05_figure.typ`          | 図表・数式設定             |
-| `06_table.typ`           | 表の詳細設定               |
-| `07_report_template.typ` | テンプレート関数の作り方   |
-| `08_slide_template.typ`  | スライドテンプレートの基礎 |
+| ファイル                 | 学習内容                         |
+| ------------------------ | -------------------------------- |
+| `01_minimal.typ`         | 最小のドキュメント               |
+| `02_page.typ`            | ページ設定                       |
+| `03_text.typ`            | フォント設定                     |
+| `04_heading.typ`         | 見出し設定                       |
+| `05_figure.typ`          | 図表・数式設定                   |
+| `06_table.typ`           | 表の詳細設定                     |
+| `07_report_template.typ` | テンプレート関数の作り方         |
+| `08_slide_template.typ`  | スライドテンプレートの基礎       |
+| `09_thesis_template.typ` | 学術論文（学位論文）の組版仕組み |
 
 詳細は [learning/README.md](learning/README.md) を参照してください。
 

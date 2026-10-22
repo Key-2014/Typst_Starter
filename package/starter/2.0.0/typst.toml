@@ -1,0 +1,8 @@
+[package]
+name = "starter"
+version = "2.0.0"
+entrypoint = "lib.typ"
+authors = ["Typst Starter Contributors"]
+license = "MIT"
+description = "Typst Starter - レポート・論文・スライド作成を支援するスターターパッケージ"
+compiler = "0.15.1"

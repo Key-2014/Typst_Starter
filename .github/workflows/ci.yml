@@ -1,0 +1,41 @@
+name: Compile Typst Examples & Learning
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  compile-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Harano Aji Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-haranoaji
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+        with:
+          typst-version: "0.15.1"
+
+      - name: Install @local/starter packages
+        run: |
+          mkdir -p ~/.local/share/typst/packages/local/starter/1.0.0
+          mkdir -p ~/.local/share/typst/packages/local/starter/2.0.0
+          cp -r package/starter/1.0.0/* ~/.local/share/typst/packages/local/starter/1.0.0/
+          cp -r package/starter/2.0.0/* ~/.local/share/typst/packages/local/starter/2.0.0/
+
+      - name: Compile all Examples, Learning, and Project Template files
+        run: |
+          set -e
+          for file in examples/*/*.typ learning/*.typ project-template/*.typ; do
+            echo "Compiling $file ..."
+            typst compile "$file" "/tmp/$(basename "$file" .typ).pdf"
+          done
+          echo "All Typst files compiled successfully!"

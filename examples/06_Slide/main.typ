@@ -3,7 +3,7 @@
 // Starter Package を使ったスライドの作成例です。
 // Touying フレームワークの university テーマを利用します。
 
-#import "@local/starter:1.0.0": *
+#import "@local/starter:2.0.0": *
 
 // スライドテンプレートを適用
 #show: slide.with(

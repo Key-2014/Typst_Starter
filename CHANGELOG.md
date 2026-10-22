@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.0.0] - 2026-10-22
+
+### Added
+
+- **Starter Package v2.0.0** (`package/starter/2.0.0/`)
+  - Typst 0.15.1 完全対応（`context` & `here()` 構文ベース）
+  - 学位論文（卒業論文・修士論文・博士論文）テンプレート `thesis.typ`（`thesis()`, `thesis-cover()`, `thesis-abstract()`, `thesis-toc()`, `start-appendix()`）を追加
+  - 章番号連動の数式・図表採番 `(1.1)`, `図 1.1`, `表 1.1` および付録自動採番 `(A.1)`, `図 A.1`
+  - レポートテンプレートの `project()` + `report-header()` 分離スタイル対応
+  - 外部パッケージのアップデート（`cetz:0.5.3`, `touying:0.8.0`）
+
+- **Examples & Learning**
+  - `examples/07_Thesis` — 学位論文（卒論・修論）の実践サンプルを追加
+  - `learning/09_thesis_template.typ` — 学術論文テンプレートの内部実装・状態管理を学ぶステップ教材を追加
+
+- **CI/CD & Installer**
+  - `.github/workflows/ci.yml` — 全サンプル（`examples/`, `learning/`, `project-template/`）の自動コンパイル検証ワークフローを追加
+  - `scripts/install-package.ps1` に `-TemplateType {report | thesis | slide}` オプションを追加
+  - 単一バイナリインストーラー（`installer/`, `dist/`）を v2.0.0 向けに更新
+
+---
+
 ## [1.1.1] - 2026-08-06
 
 ### Changed
