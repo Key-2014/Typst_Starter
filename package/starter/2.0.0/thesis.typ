@@ -1,17 +1,16 @@
 // thesis.typ
-// 学術論文・学位論文テンプレートモジュール（学士・修士・博士論文対応）
-// Typst 0.15.1 完全準拠（context & here() ベース）
+// Dedicated Academic Thesis Template (Bachelor / Master / Ph.D.)
+// Fully compatible with Typst 0.15.1 (pure context & here based)
 
 #import "common.typ": *
-#import "fonts.typ": _report-font-family, _report-math-font-family
 #import "utils.typ": *
 
-// --- 内部状態管理 ---
+// --- Internal States ---
 #let in-appendix = state("thesis-in-appendix", false)
 #let show-running-header = state("thesis-show-running-header", false)
 
-// --- 付録モードへの切り替え ---
-// 付録章の直前で呼び出すことで、見出し・数式・図表の採番を A, A.1, (A.1), 図 A.1 へ自動切替する
+// --- Switch to Appendix Mode ---
+// Call this function before appendix chapters to switch numbering to Appendix A, A.1, Eq. (A.1), Fig. A.1, etc.
 #let start-appendix() = {
   in-appendix.update(true)
   counter(heading).update(0)
@@ -21,25 +20,42 @@
   counter(figure.where(kind: raw)).update(0)
 }
 
-// --- 論文メイン設定ルール ---
+// --- Main Thesis Setup Rule ---
 #let thesis(
   title: "",
   author: "",
   lang: "ja",
   supplement-lang: "ja",
   paper: "a4",
-  margin: (top: 30mm, bottom: 30mm, left: 30mm, right: 30mm),
-  twoside: false,
+  // Binding mode: "digital" (electronic submission), "oneside" (single-sided print), or "twoside" (double-sided print)
+  binding: "digital",
+  // Explicit margin override (set to auto to automatically resolve margins from binding mode)
+  margin: auto,
   body,
 ) = {
   let labels = supplement-labels.at(supplement-lang, default: supplement-labels.ja)
-  let font-family = _report-font-family(lang)
-  let math-font-family = _report-math-font-family(lang)
 
-  // --- ページ・ランニングヘッダー設定 ---
+  // Resolve page margins based on the binding mode
+  let resolved-margin = if margin != auto {
+    margin
+  } else if binding == "digital" {
+    // Digital mode: Symmetric 25mm margins optimized for screen reading (160mm text width)
+    (top: 30mm, bottom: 25mm, left: 25mm, right: 25mm)
+  } else if binding == "oneside" {
+    // One-sided print mode: Extra gutter (+5mm) on the left side for binding
+    (top: 30mm, bottom: 25mm, left: 30mm, right: 25mm)
+  } else if binding == "twoside" {
+    // Two-sided print mode: Inner binding gutter (inside: 30mm, outside: 25mm)
+    (top: 30mm, bottom: 25mm, inside: 30mm, outside: 25mm)
+  } else {
+    // Fallback: Default symmetric margins
+    (top: 30mm, bottom: 25mm, left: 25mm, right: 25mm)
+  }
+
+  // --- Page & Document Settings ---
   set page(
     paper: paper,
-    margin: margin,
+    margin: resolved-margin,
     numbering: "1",
     header: context {
       if not show-running-header.get() {
@@ -47,6 +63,7 @@
       }
       let current-physical-page = here().page()
       let current-page = counter(page).display()
+      // Query heading of the current section
       let h1-list = query(heading.where(level: 1))
       let active-h1 = none
       for h in h1-list {
@@ -77,28 +94,51 @@
       }
 
       set text(size: 9pt, fill: luma(90))
-      grid(
-        columns: (1fr, auto),
-        align(left)[#header-title],
-        align(right)[#current-page],
-      )
+
+      // Alternate running header positions on even/odd pages for two-sided printing
+      if binding == "twoside" and calc.even(current-physical-page) {
+        // Even page (verso / left): Page number on the left, chapter title on the right
+        grid(
+          columns: (auto, 1fr),
+          align(left)[#current-page], align(right)[#header-title],
+        )
+      } else {
+        // Odd page (recto / right) or single-sided / digital: Chapter title on the left, page number on the right
+        grid(
+          columns: (1fr, auto),
+          align(left)[#header-title], align(right)[#current-page],
+        )
+      }
+
       v(0.3em)
       line(length: 100%, stroke: 0.5pt + luma(180))
     },
     footer: context {
-      // ランニングヘッダー無効時（前付けページ等）のみ下部中央にページ番号を表示
+      // Show page number only when running header is disabled (e.g., front matter)
       if not show-running-header.get() {
         align(center)[#counter(page).display()]
       }
     },
   )
 
-  // --- 段落・フォント設定 ---
+  // --- Paragraph & Typography Settings ---
   set par(
     justify: true,
     first-line-indent: (amount: 1em, all: true),
     leading: 0.85em,
   )
+
+  let font-family = if lang == "ja" {
+    ("New Computer Modern", "Harano Aji Mincho", "New Computer Modern Math")
+  } else {
+    ("New Computer Modern", "New Computer Modern Math")
+  }
+
+  let math-font-family = if lang == "ja" {
+    ("New Computer Modern Math", "New Computer Modern", "Harano Aji Mincho")
+  } else {
+    ("New Computer Modern Math", "New Computer Modern")
+  }
 
   set text(
     font: font-family,
@@ -106,18 +146,18 @@
     lang: lang,
   )
 
-  // --- 参考文献設定 ---
+  // --- Bibliography Settings ---
   set bibliography(
     title: labels.citation,
     style: "ieee",
   )
 
-  // --- 数式スタイル ---
+  // --- Math Styling ---
   show math.equation: set text(font: math-font-family)
   show math.equation.where(block: false): set math.frac(style: "horizontal")
   show math.equation.where(block: true): set block(breakable: true)
 
-  // --- 章連動の数式採番: (1.1) または (A.1) ---
+  // --- Chapter-Linked Equation Numbering: (1.1) or (A.1) ---
   set math.equation(
     numbering: (..nums) => {
       let app = in-appendix.get()
@@ -129,7 +169,7 @@
     supplement: labels.eq,
   )
 
-  // --- 章連動の図表採番: 図 1.1, 表 1.1 ---
+  // --- Chapter-Linked Figure & Table Numbering: Fig. 1.1, Table 1.1 ---
   set figure(
     numbering: (..nums) => {
       let app = in-appendix.get()
@@ -143,7 +183,7 @@
   show figure.where(kind: table): set figure(supplement: labels.tab)
   show figure.where(kind: table): set figure.caption(position: top)
 
-  // --- 見出し採番 & 章改ページ制御 ---
+  // --- Heading Numbering & Chapter Break ---
   set heading(
     numbering: (..nums) => {
       let app = in-appendix.get()
@@ -170,7 +210,7 @@
 
   show heading.where(level: 1): set heading(supplement: none)
 
-  // 各章（レベル1見出し）で数式・図表カウンターをリセットし改ページ
+  // Reset equation and figure counters at each level-1 heading (Chapter)
   show heading.where(level: 1): it => {
     counter(math.equation).update(0)
     counter(figure.where(kind: image)).update(0)
@@ -207,11 +247,12 @@
   body
 }
 
-// --- レイアウトコンポーネント: 論文表紙ページ ---
+// --- Layout Component: Thesis Cover Page ---
 #let thesis-cover(
   academic-year: "",
   thesis-type: auto,
   title: "",
+  subtitle: "",
   affiliation: "",
   student-id: "",
   author: "",
@@ -225,41 +266,75 @@
     thesis-type
   }
 
-  set page(header: none, footer: none)
+  set page(
+    margin: (top: 35mm, bottom: 35mm, left: 30mm, right: 30mm),
+    header: none,
+    footer: none,
+  )
 
-  align(center + horizon)[
+  set par(first-line-indent: 0pt, leading: 1em)
+
+  align(center)[
     #if academic-year != "" or resolved-thesis-type != "" [
-      #text(16pt)[
+      #text(14pt, weight: "regular")[
         #if academic-year != "" [#academic-year #if lang == "ja" [年度] else [Academic Year]]
-        #h(0.5em)
+        #h(0.8em)
         #resolved-thesis-type
       ]
+    ]
+
+    #v(1fr)
+
+    #block(width: 90%)[
+      #set par(leading: 0.7em)
+      #text(20pt, weight: "bold")[#title]
+      #if subtitle != "" [
+        #v(0.8em)
+        #text(14pt, weight: "regular")[--- #subtitle ---]
+      ]
+    ]
+
+    #v(1.8fr)
+
+    #if affiliation != "" [
+      #text(13pt)[#affiliation]
       #v(2.5em)
     ]
 
-    #text(24pt, weight: "bold")[#title]
+    #text(13pt)[
+      #grid(
+        columns: (auto, auto),
+        column-gutter: 1.5em,
+        row-gutter: 1.2em,
+        align: (right + horizon, left + horizon),
+        ..if student-id != "" {
+          (
+            if lang == "ja" [学生番号] else [Student ID],
+            [#student-id],
+          )
+        } else { () },
+        if lang == "ja" [氏  名] else [Author],
+        [#author],
+        ..if supervisor != "" {
+          (
+            if lang == "ja" [指導教員] else [Supervisor],
+            [#supervisor],
+          )
+        } else { () },
+      )
+    ]
 
-    #v(7em)
+    #v(3em)
 
-    #align(center)[
-      #block(width: 70%)[
-        #grid(
-          columns: (auto, 1fr),
-          row-gutter: 1.3em,
-          if lang == "ja" [所属:] else [Affiliation:], h(1.5em) + affiliation,
-          if lang == "ja" [学生番号:] else [Student ID:], h(1.5em) + student-id,
-          if lang == "ja" [氏名:] else [Author:], h(1.5em) + author,
-          if lang == "ja" [指導教員:] else [Supervisor:], h(1.5em) + supervisor,
-          if lang == "ja" [提出日:] else [Date:], h(1.5em) + date,
-        )
-      ]
+    #if date != "" [
+      #text(12pt)[#date]
     ]
   ]
   pagebreak()
   counter(page).update(1)
 }
 
-// --- レイアウトコンポーネント: 概要（要旨）ページ ---
+// --- Layout Component: Abstract ---
 #let thesis-abstract(
   lang: "ja",
   body,
@@ -279,7 +354,7 @@
   pagebreak()
 }
 
-// --- レイアウトコンポーネント: 目次・図目次・表目次 ---
+// --- Layout Component: Table of Contents & Start of Body ---
 #let thesis-toc(
   lang: "ja",
   depth: 3,
@@ -288,7 +363,7 @@
 ) = {
   let labels = supplement-labels.at(lang, default: supplement-labels.ja)
 
-  // 前付けはローマ数字ページ番号
+  // Front matter uses Roman numerals
   set page(numbering: "i")
 
   align(center)[#text(16pt, weight: "bold")[#labels.toc]]
@@ -316,7 +391,7 @@
   }
 
   pagebreak()
-  // 本文開始: ランニングヘッダーを有効化し、アラビア数字 1 ページへリセット
+  // Switch to body pages: Arabic numerals and running headers enabled
   show-running-header.update(true)
   counter(page).update(1)
 }

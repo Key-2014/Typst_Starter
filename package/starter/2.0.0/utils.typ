@@ -1,21 +1,21 @@
 // utils.typ
-// ユーティリティ関数モジュール
 
+// --- Packages ---
 #import "@preview/unify:0.8.1": qty
 
-// --- テキスト・数式補助 ---
+// --- Utils ---
 #let bk = h(1em)
 #let qed = h(1fr) + $qed$
 #let rhs = [(右辺)]
 #let lhs = [(左辺)]
 
-// --- 順列・組合せ記法 ---
+// --- Math Notations ---
 #let combination(n, r) = math.attach(math.upright("C"), bl: n, br: r)
 #let permutation(n, r) = math.attach(math.upright("P"), bl: n, br: r)
 #let hcombination(n, r) = math.attach(math.upright("H"), bl: n, br: r)
 
-// --- ボックス装飾 ---
-// 中央揃え枠線ボックス
+// --- Boxes ---
+// Centered rectangle
 #let crect(body) = align(center, block(
   stroke: 1pt,
   inset: 10pt,
@@ -25,7 +25,7 @@
   align(left, body)
 ))
 
-// 全幅枠線ボックス
+// Full-width rectangle
 #let frect(body) = block(
   width: 100%,
   stroke: 1pt,
@@ -36,7 +36,7 @@
   align(left, body)
 )
 
-// 解答ボックス
+// Answer box
 #let ans(body) = box(
   stroke: 1pt,
   inset: (x: 5pt, y: 5pt),
@@ -46,26 +46,31 @@
   if type(body) == str { body } else { $#body$ }
 )
 
-// 単位フォーマッタ（unify ラッパー）
+// Unit formatter
 #let u(unit-str, b: false) = {
-  // '*' をスペースに正規化し "kg*m/s^2" 等を unify でパース可能にする
+  // Normalize '*' to space so expressions like "kg*m/s^2" are parsed by unify
   let normalized = unit-str.replace("*", " ").trim()
   let m = normalized.match(regex("^([+-]?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)\\s+(.+)$"))
 
   if m != none and not b {
-    // 数値と単位の両方が与えられた場合（例: "9.81 m/s^2"）
+    // When both a numerical value and a unit are provided (e.g., "9.81 m/s^2")
     let num-part = m.captures.at(0)
     let unit-part = m.captures.at(1)
     qty(num-part, unit-part)
   } else {
-    // 単位のみをフォーマットする場合
+    // Parse and format complex units using qty from the unify package
+    // Leave the first argument (amount) empty to extract only the unit part
     let body = qty("", normalized)
+
+    // 2. Handle brackets [ ]
     let content = if b { $[#body]$ } else { body }
+
+    // 3. Output with a thin space (1/6 em)
     $#h(0.16667em) #content$
   }
 }
 
-// グローバル数式カウンターに影響を与えずに手動タグを付与する
+// Manually tag a specific equation without affecting the global equation counter
 #let eqtag(content, tag) = {
   math.equation(content, block: true, numbering: _ => "(" + tag + ")")
 }

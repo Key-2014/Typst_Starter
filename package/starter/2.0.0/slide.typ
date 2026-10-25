@@ -1,12 +1,10 @@
 // slide.typ
-// スライドプレゼンテーション用テンプレートモジュール
-// Touying (university テーマ) + Theorion + Fletcher + CeTZ 対応
 
+// --- Shared Packages, Labels & Macros ---
 #import "common.typ": *
-#import "fonts.typ": _slide-font-family, _slide-math-font-family
 #import "utils.typ": *
 
-// --- スライド・Touying パッケージ ---
+// --- Slide/Touying Packages ---
 #import "@preview/touying:0.8.0": *
 #import themes.university: *
 #import "@preview/fletcher:0.5.8" as fletcher
@@ -14,7 +12,7 @@
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/theorion:0.6.0": *
 
-// --- アニメーション対応 Reducer ---
+// --- Specialized Reducers for Slides ---
 #let fletcher-diagram = touying-reducer.with(
   reduce: fletcher.diagram,
   cover: fletcher.hide,
@@ -24,7 +22,7 @@
   cover: draw.hide.with(bounds: true),
 )
 
-// --- スライドメイン設定ルール ---
+// --- Main Template Setup ---
 #let slides(
   lang: "ja",
   supplement-lang: "ja",
@@ -46,14 +44,26 @@
   },
   body,
 ) = {
+  // Select labels dynamically based on the language
   let labels = supplement-labels.at(supplement-lang, default: supplement-labels.ja)
-  let font-family = _slide-font-family(lang)
-  let math-font-family = _slide-math-font-family(lang)
 
-  // Theorion 定理環境を有効化
+  // Configure fallback fonts depending on the language
+  let font-family = if lang == "ja" {
+    ("New Computer Modern", "Harano Aji Gothic", "New Computer Modern Math")
+  } else {
+    ("New Computer Modern", "New Computer Modern Math")
+  }
+
+  let math-font-family = if lang == "ja" {
+    ("New Computer Modern Math", "New Computer Modern", "Harano Aji Gothic")
+  } else {
+    ("New Computer Modern Math", "New Computer Modern")
+  }
+
+  // Configure theorion theorems/environments
   show: show-theorion
 
-  // Touying university テーマを設定
+  // Configure the university theme of Touying
   show: university-theme.with(
     aspect-ratio: aspect-ratio,
     config-common(
@@ -75,7 +85,7 @@
     ),
   )
 
-  // 日本語ゴシック体フォント設定
+  // Configure Japanese Gothic fonts for slides explicitly
   set text(
     font: font-family,
     size: font-size,
@@ -87,20 +97,23 @@
     style: "ieee",
   )
 
-  // 数式フォント設定
+  // Follow math font of original template
   show math.equation: set text(
     font: math-font-family,
     size: font-size,
   )
 
+  // Use horizontal style for inline fractions
   show math.equation.where(block: false): set math.frac(style: "horizontal")
+
+  // Allow block equations to break across pages
   show math.equation.where(block: true): set block(breakable: true)
 
   set math.equation(
     supplement: labels.eq,
   )
 
-  // --- 図表設定 ---
+  // --- Tables & Figures ---
   set figure(supplement: labels.fig)
   show figure.where(kind: table): set figure(supplement: labels.tab)
   show figure.where(kind: table): set figure.caption(position: top)

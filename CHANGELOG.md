@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.1.0] - 2026-10-25
+
+### Added
+
+- **Starter Package v2.1.0** (`package/starter/2.1.0/`)
+  - **学位論文テンプレート (`thesis.typ`) の機能強化**
+    - 製本・印刷余白モード `binding` オプションを追加 (`"digital"` / `"oneside"` / `"twoside"`)
+    - 両面印刷（`twoside`）時の奇数・偶数ページでの見開きランニングヘッダー左右交互配置に対応
+    - 表紙テンプレート (`thesis-cover`) に `subtitle`（副題）引数を追加し、全体の垂直余白バランスを改善
+  - **レポートテンプレート (`report.typ`) の引数整理**
+    - `report()` 関数で `title`, `author`, `student-id`, `date` などのメタデータを直接指定可能に
+    - `project` および `report-header` との互換性を強化
+  - **ユーティリティ改善 (`utils.typ`)**
+    - 単位表記関数 `u()` のパース処理を改善（掛け算記号 `*` の正規化など）
+
+### Changed
+
+- テンプレートコード内のコメントおよび内部ドキュメントを英語に統一・整理し国際化対応を推進
+- パッケージ内部のフォント・数式フォント設定処理をリファクタリング
+
+
+---
+
 ## [2.0.0] - 2026-10-22
 
 ### Added
