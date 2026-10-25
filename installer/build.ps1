@@ -9,7 +9,7 @@ $InstallerDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Split-Path -Parent $InstallerDir
 $DistDir = Join-Path $RepoRoot "dist"
 $ResourcesDir = Join-Path $InstallerDir "resources"
-$PackageSource = Join-Path $RepoRoot "package\starter\2.0.0"
+$PackageSource = Join-Path $RepoRoot "package\starter\2.1.0"
 $TemplateSource = Join-Path $RepoRoot "project-template"
 
 Write-Host "==================================================" -ForegroundColor Cyan
@@ -41,9 +41,9 @@ Write-Host "[3/3] Cross-compiling binaries for release..." -ForegroundColor Yell
 
 $targets = @(
     @{ OS = "windows"; Arch = "amd64"; Output = "Typst-Starter-Setup-windows-amd64.exe" },
-    @{ OS = "linux";   Arch = "amd64"; Output = "Typst-Starter-Setup-linux-amd64" },
-    @{ OS = "darwin";  Arch = "amd64"; Output = "Typst-Starter-Setup-darwin-amd64" },
-    @{ OS = "darwin";  Arch = "arm64"; Output = "Typst-Starter-Setup-darwin-arm64" }
+    @{ OS = "linux"; Arch = "amd64"; Output = "Typst-Starter-Setup-linux-amd64" },
+    @{ OS = "darwin"; Arch = "amd64"; Output = "Typst-Starter-Setup-darwin-amd64" },
+    @{ OS = "darwin"; Arch = "arm64"; Output = "Typst-Starter-Setup-darwin-arm64" }
 )
 
 Push-Location $InstallerDir
@@ -61,11 +61,13 @@ try {
         if (Test-Path $outFile) {
             $size = (Get-Item $outFile).Length / 1MB
             Write-Host (" OK ({0:N2} MB)" -f $size) -ForegroundColor Green
-        } else {
+        }
+        else {
             Write-Host " FAILED" -ForegroundColor Red
         }
     }
-} finally {
+}
+finally {
     Pop-Location
 }
 

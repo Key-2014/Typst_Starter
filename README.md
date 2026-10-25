@@ -37,13 +37,13 @@ Typst 公式ドキュメントは非常に充実しているため、細かい�
 
 ## 3. 必要環境
 
-| 項目     | 要件                                 | 備考                                   |
-| -------- | ------------------------------------ | -------------------------------------- |
-| OS       | Windows 10 / 11（macOS / Linux 対応）| 各OS向けインストーラーを提供           |
-| Typst    | 最新安定版                           | CLIツール                              |
-| エディタ | Visual Studio Code（推奨）           |                                        |
-| 拡張機能 | Tinymist Typst, vscode-pdf           | VSCode 拡張機能                        |
-| フォント | 原ノ味フォント（推奨・必須ではない） | システムフォントへの自動フォールバック |
+| 項目     | 要件                                  | 備考                                   |
+| -------- | ------------------------------------- | -------------------------------------- |
+| OS       | Windows 10 / 11（macOS / Linux 対応） | 各OS向けインストーラーを提供           |
+| Typst    | 最新安定版                            | CLIツール                              |
+| エディタ | Visual Studio Code（推奨）            |                                        |
+| 拡張機能 | Tinymist Typst, vscode-pdf            | VSCode 拡張機能                        |
+| フォント | 原ノ味フォント（推奨・必須ではない）  | システムフォントへの自動フォールバック |
 
 ---
 
@@ -143,7 +143,7 @@ typst fonts | Select-String "Harano"
 
 ## 9. Starter Package 導入（ワンクリック・インストーラー）
 
-Starter Package（`@local/starter:2.0.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
+Starter Package（`@local/starter:2.1.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
 
 ### ① GitHub Releases からインストーラーをダウンロード（推奨）
 
@@ -155,11 +155,11 @@ Starter Package（`@local/starter:2.0.0`）は、**インストーラーを実�
 2. ダウンロードした実行ファイルを起動します（Windows では**ダブルクリックで実行**）。
 
 これだけで、以下の 2 つが自動的に完了します：
-1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.0.0\`）へパッケージ一式が自動コピーされます。
+1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.1.0\`）へパッケージ一式が自動コピーされます。
 2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（Windows: `C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
 
 > 💡 **追加の環境構築やコマンド操作は不要です。**
-> インストーラー完了後、すぐに `#import "@local/starter:2.0.0": *` が利用可能になります。
+> インストーラー完了後、すぐに `#import "@local/starter:2.1.0": *` が利用可能になります。
 > macOS / Linux で実行する場合は、ターミナルで実行権限を付与して実行してください：
 > ```bash
 > chmod +x Typst-Starter-Setup-*
@@ -180,17 +180,17 @@ Starter Package（`@local/starter:2.0.0`）は、**インストーラーを実�
 ```
 
 #### 手動配置の場合
-`package/starter/2.0.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
+`package/starter/2.1.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
 
-- **Windows**: `%APPDATA%\typst\packages\local\starter\2.0.0\`
-- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/2.0.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/2.0.0/`）
+- **Windows**: `%APPDATA%\typst\packages\local\starter\2.1.0\`
+- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/2.1.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/2.1.0/`）
 
 ### インストール確認
 
 VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
 
 ```typ
-#import "@local/starter:2.0.0": *
+#import "@local/starter:2.1.0": *
 ```
 
 ---
@@ -208,7 +208,7 @@ VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` �
 `main.typ` を開き、内容を編集します：
 
 ```typ
-#import "@local/starter:2.0.0": *
+#import "@local/starter:2.1.0": *
 
 #show: report.with(
   title: "物理学実験レポート",

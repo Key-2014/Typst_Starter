@@ -9,10 +9,10 @@ Typst Starter のローカルパッケージです。
 
 ## 概要
 
-`package/starter/2.0.0/` は Typst のローカルパッケージ（`@local/starter:2.0.0`）の実体です（後方互換性のために `1.0.0` も同梱されています）。
+`package/starter/2.1.0/` は Typst のローカルパッケージ（`@local/starter:2.1.0`）の実体です（後方互換性のために `1.0.0` も同梱されています）。
 
-- **一般的な利用者**: リリースされているインストーラー（`Typst-Starter-Setup-*.exe` 等）を実行するだけで、Typst のローカルパッケージフォルダ（`%APPDATA%\typst\packages\local\starter\2.0.0\`）へ自動配置されます。
-- **ドキュメントでの利用**: 利用者の `.typ` ファイルから `#import "@local/starter:2.0.0": *` の 1 行で読み込まれます。
+- **一般的な利用者**: リリースされているインストーラー（`Typst-Starter-Setup-*.exe` 等）を実行するだけで、Typst のローカルパッケージフォルダ（`%APPDATA%\typst\packages\local\starter\2.1.0\`）へ自動配置されます。
+- **ドキュメントでの利用**: 利用者の `.typ` ファイルから `#import "@local/starter:2.1.0": *` の 1 行で読み込まれます。
 
 ---
 
@@ -22,7 +22,7 @@ Typst Starter のローカルパッケージです。
 package/
 └── starter/
     ├── 1.0.0/                ← 旧バージョン（後方互換用）
-    └── 2.0.0/                ← 現行メジャーバージョン (Typst 0.15.1 対応)
+    └── 2.1.0/                ← 現行メジャーバージョン (Typst 0.15.1 対応)
         ├── typst.toml        ← パッケージメタ情報
         ├── lib.typ           ← 公開API（エントリーポイント）
         ├── report.typ        ← レポートテンプレート (report / project / report-header)
@@ -39,17 +39,17 @@ package/
 
 利用者は `lib.typ` 経由で以下のテンプレート関数・ユーティリティを利用します：
 
-| 関数 | 説明 |
-|---|---|
-| `report()` | レポート統合テンプレート（show rule） |
-| `project()` + `report-header()` | ページ設定とヘッダーを分離したレポート構成 |
-| `thesis()` | 学術論文・学位論文テンプレート（show rule、章連動採番・ランニングヘッダー付き） |
-| `thesis-cover()` / `thesis-abstract()` / `thesis-toc()` | 論文用の表紙・要旨・目次（図目次・表目次対応）コンポーネント |
-| `start-appendix()` | 論文の付録モードへの切り替え（A, A.1, (A.1), 図 A.1 へ自動切替） |
-| `slide()` / `slides()` | スライドテンプレート（show rule、Touying university theme） |
+| 関数                                                    | 説明                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `report()`                                              | レポート統合テンプレート（show rule）                                           |
+| `project()` + `report-header()`                         | ページ設定とヘッダーを分離したレポート構成                                      |
+| `thesis()`                                              | 学術論文・学位論文テンプレート（show rule、章連動採番・ランニングヘッダー付き） |
+| `thesis-cover()` / `thesis-abstract()` / `thesis-toc()` | 論文用の表紙・要旨・目次（図目次・表目次対応）コンポーネント                    |
+| `start-appendix()`                                      | 論文の付録モードへの切り替え（A, A.1, (A.1), 図 A.1 へ自動切替）                |
+| `slide()` / `slides()`                                  | スライドテンプレート（show rule、Touying university theme）                     |
 
 ```typ
-#import "@local/starter:2.0.0": *
+#import "@local/starter:2.1.0": *
 
 #show: report.with(
   title: "レポートタイトル",
@@ -63,13 +63,13 @@ package/
 
 パッケージのメタ情報を定義します。
 
-| フィールド | 値 |
-|---|---|
-| name | `starter` |
-| version | `2.0.0` |
+| フィールド | 値        |
+| ---------- | --------- |
+| name       | `starter` |
+| version    | `2.1.0`   |
 | entrypoint | `lib.typ` |
-| license | `MIT` |
-| compiler | `0.15.1` |
+| license    | `MIT`     |
+| compiler   | `0.15.1`  |
 
 ---
 
@@ -77,11 +77,11 @@ package/
 
 以下は内部および共通モジュールです。
 
-| モジュール | 役割 |
-|---|---|
+| モジュール   | 役割                                                                                                           |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
 | `common.typ` | 外部パッケージ（physica, unify, cetz, showybox, whalogen）の一元管理とローカライズラベル（図・表・式・付録等） |
-| `fonts.typ` | フォントファミリーの定義（原ノ味明朝・ゴシック + New Computer Modern） |
-| `utils.typ` | ユーティリティ関数（bk, qed, crect, frect, ans, u, eqtag 等） |
+| `fonts.typ`  | フォントファミリーの定義（原ノ味明朝・ゴシック + New Computer Modern）                                         |
+| `utils.typ`  | ユーティリティ関数（bk, qed, crect, frect, ans, u, eqtag 等）                                                  |
 
 ---
 

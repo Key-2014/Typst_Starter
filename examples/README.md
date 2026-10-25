@@ -6,15 +6,15 @@ Starter Package の利用例です。
 
 ## Examples 一覧
 
-| Example | 内容 | 主な学習ポイント |
-|---|---|---|
-| `01_First_Report` | 最も基本的なレポート | テンプレートの使い方、見出しの書き方 |
-| `02_Image` | 画像の挿入 | figure, image, キャプション、参照 |
-| `03_Table` | 表の作成 | table, 列幅、ストライプ |
-| `04_Equation` | 数式の記述 | 数式ナンバリング、physica, u(), ans(), eqtag() |
-| `05_Bibliography` | 参考文献の引用 | .bib ファイル、@key による引用 |
-| `06_Slide` | スライドの作成 | Touying テーマ、title-slide |
-| `07_Thesis` | 学位論文（卒論・修論）の作成 | `thesis()`, 表紙・要旨・図表目次、章連動採番 `(1.1)`、付録 `start-appendix()` |
+| Example           | 内容                         | 主な学習ポイント                                                              |
+| ----------------- | ---------------------------- | ----------------------------------------------------------------------------- |
+| `01_First_Report` | 最も基本的なレポート         | テンプレートの使い方、見出しの書き方                                          |
+| `02_Image`        | 画像の挿入                   | figure, image, キャプション、参照                                             |
+| `03_Table`        | 表の作成                     | table, 列幅、ストライプ                                                       |
+| `04_Equation`     | 数式の記述                   | 数式ナンバリング、physica, u(), ans(), eqtag()                                |
+| `05_Bibliography` | 参考文献の引用               | .bib ファイル、@key による引用                                                |
+| `06_Slide`        | スライドの作成               | Touying テーマ、title-slide                                                   |
+| `07_Thesis`       | 学位論文（卒論・修論）の作成 | `thesis()`, 表紙・要旨・図表目次、章連動採番 `(1.1)`、付録 `start-appendix()` |
 
 ---
 
@@ -48,10 +48,10 @@ Examples に順番はありますが、**利用順は自由** です。
 
 ## Package について
 
-すべての Examples は Starter Package（`@local/starter:2.0.0`）を利用しています。
+すべての Examples は Starter Package（`@local/starter:2.1.0`）を利用しています。
 
 ```typ
-#import "@local/starter:2.0.0": *
+#import "@local/starter:2.1.0": *
 ```
 
 Package がインストールされていない場合はコンパイルできません。

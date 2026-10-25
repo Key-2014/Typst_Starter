@@ -9,24 +9,26 @@ $ErrorActionPreference = "Stop"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Split-Path -Parent $ScriptDir
-$PackageSource = Join-Path $RepoRoot "package\starter\2.0.0"
+$PackageSource = Join-Path $RepoRoot "package\starter\2.1.0"
 $TemplateSource = Join-Path $RepoRoot "project-template"
 
 if ($IsWindows -or $env:OS -eq "Windows_NT") {
     $BaseDataDir = if ($env:APPDATA) { $env:APPDATA } else { Join-Path $HOME "AppData\Roaming" }
-} elseif ($env:XDG_DATA_HOME) {
+}
+elseif ($env:XDG_DATA_HOME) {
     $BaseDataDir = $env:XDG_DATA_HOME
-} else {
+}
+else {
     $BaseDataDir = Join-Path $HOME ".local/share"
 }
-$TypstDataDir = Join-Path $BaseDataDir "typst\packages\local\starter\2.0.0"
+$TypstDataDir = Join-Path $BaseDataDir "typst\packages\local\starter\2.1.0"
 
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host "     Typst Starter Package Installer v2.0.0       " -ForegroundColor Cyan
+Write-Host "     Typst Starter Package Installer v2.1.0       " -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# 1. パッケージ配置 (2.0.0)
+# 1. パッケージ配置 (2.1.0)
 if (-not (Test-Path $PackageSource)) {
     Write-Host "[ERROR] Package source not found: $PackageSource" -ForegroundColor Red
     exit 1
@@ -38,7 +40,7 @@ if (-not (Test-Path $TypstDataDir)) {
 }
 
 Copy-Item -Path (Join-Path $PackageSource "*") -Destination $TypstDataDir -Recurse -Force
-Write-Host "[OK] Package (@local/starter:2.0.0) installed to: $TypstDataDir" -ForegroundColor Green
+Write-Host "[OK] Package (@local/starter:2.1.0) installed to: $TypstDataDir" -ForegroundColor Green
 
 # 2. プロジェクト初期化 (オプション)
 if ($CreateProject) {
@@ -58,7 +60,8 @@ if ($CreateProject) {
         if (Test-Path $ThesisSample) {
             Copy-Item -Path $ThesisSample -Destination (Join-Path $TargetProjectDir "main.typ") -Force
         }
-    } elseif ($TemplateType -eq "slide") {
+    }
+    elseif ($TemplateType -eq "slide") {
         $SlideSample = Join-Path $RepoRoot "examples\06_Slide\main.typ"
         if (Test-Path $SlideSample) {
             Copy-Item -Path $SlideSample -Destination (Join-Path $TargetProjectDir "main.typ") -Force
