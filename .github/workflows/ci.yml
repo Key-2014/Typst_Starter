@@ -14,10 +14,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Harano Aji Fonts
+      - name: Install Harano Aji & Japanese Fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-haranoaji
+          sudo apt-get install -y fonts-noto-cjk curl
+          mkdir -p ~/.local/share/fonts/haranoaji
+          # 原ノ味明朝・ゴシック（Regular / Bold）をダウンロード配置
+          curl -sL https://raw.githubusercontent.com/trueroad/HaranoAjiFonts/master/HaranoAjiMincho-Regular.otf -o ~/.local/share/fonts/haranoaji/HaranoAjiMincho-Regular.otf
+          curl -sL https://raw.githubusercontent.com/trueroad/HaranoAjiFonts/master/HaranoAjiMincho-Bold.otf -o ~/.local/share/fonts/haranoaji/HaranoAjiMincho-Bold.otf
+          curl -sL https://raw.githubusercontent.com/trueroad/HaranoAjiFonts/master/HaranoAjiGothic-Regular.otf -o ~/.local/share/fonts/haranoaji/HaranoAjiGothic-Regular.otf
+          curl -sL https://raw.githubusercontent.com/trueroad/HaranoAjiFonts/master/HaranoAjiGothic-Bold.otf -o ~/.local/share/fonts/haranoaji/HaranoAjiGothic-Bold.otf
+          fc-cache -f
+
+
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
