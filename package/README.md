@@ -9,10 +9,10 @@ Typst Starter のローカルパッケージです。
 
 ## 概要
 
-`package/starter/2.1.0/` は Typst のローカルパッケージ（`@local/starter:2.1.0`）の実体です（後方互換性のために `1.0.0` も同梱されています）。
+`package/starter/2.2.0/` は Typst のローカルパッケージ（`@local/starter:2.2.0`）の実体です（後方互換性のために `1.0.0` も同梱されています）。
 
-- **一般的な利用者**: リリースされているインストーラー（`Typst-Starter-Setup-*.exe` 等）を実行するだけで、Typst のローカルパッケージフォルダ（`%APPDATA%\typst\packages\local\starter\2.1.0\`）へ自動配置されます。
-- **ドキュメントでの利用**: 利用者の `.typ` ファイルから `#import "@local/starter:2.1.0": *` の 1 行で読み込まれます。
+- **一般的な利用者**: リリースされているインストーラー（`Typst-Starter-Setup-*.exe` 等）を実行するだけで、Typst のローカルパッケージフォルダ（`%APPDATA%\typst\packages\local\starter\2.2.0\`）へ自動配置されます。
+- **ドキュメントでの利用**: 利用者の `.typ` ファイルから `#import "@local/starter:2.2.0": *` の 1 行で読み込まれます。
 
 ---
 
@@ -22,7 +22,9 @@ Typst Starter のローカルパッケージです。
 package/
 └── starter/
     ├── 1.0.0/                ← 旧バージョン（後方互換用）
-    └── 2.1.0/                ← 現行メジャーバージョン (Typst 0.15.1 対応)
+    ├── 2.0.0/                ← 旧バージョン（後方互換用）
+    ├── 2.1.0/                ← 旧バージョン（後方互換用）
+    └── 2.2.0/                ← 現行メジャーバージョン (Typst 0.15.1 対応)
         ├── typst.toml        ← パッケージメタ情報
         ├── lib.typ           ← 公開API（エントリーポイント）
         ├── report.typ        ← レポートテンプレート (report / project / report-header)
@@ -49,7 +51,7 @@ package/
 | `slide()` / `slides()`                                  | スライドテンプレート（show rule、Touying university theme）                     |
 
 ```typ
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 #show: report.with(
   title: "レポートタイトル",
@@ -66,7 +68,7 @@ package/
 | フィールド | 値        |
 | ---------- | --------- |
 | name       | `starter` |
-| version    | `2.1.0`   |
+| version    | `2.2.0`   |
 | entrypoint | `lib.typ` |
 | license    | `MIT`     |
 | compiler   | `0.15.1`  |

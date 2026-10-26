@@ -5,7 +5,7 @@
 // 章番号に連動する数式・図表番号、ランニングヘッダー、
 // 付録モードへの切り替え（start-appendix）を備えています。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 // 1. 論文テンプレートを適用
 #show: thesis.with(

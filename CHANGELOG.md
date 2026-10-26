@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.2.0] - 2026-10-26
+
+### Added
+
+- **Starter Package v2.2.0** (`package/starter/2.2.0/`)
+  - **目次 (`thesis-toc`) デザインのリファクタリング (`thesis.typ`)**
+    - 目次エントリ配置ヘルパー `toc-entry()` を導入し、章・節・項番号の配置幅とインデントを厳密化（レベルごとのズレを解消）
+    - 第1レベル（章）のドットリーダーを非表示にし、視覚的な階層・メリハリを改善
+    - 付録（Appendix）および図目次（LOF）・表目次（LOT）の番号フォーマット対応を強化
+  - **VS Code スニペット (`project-template/.vscode/typst.code-snippets`)**
+    - Typst Starter 向けのスニペット定義を追加（論文、レポート、スライド、数式、図表、CeTZ 等の入力支援）
+
+### Changed
+
+- すべての Examples (`examples/`) および初期プロジェクトテンプレート (`project-template/`) のインポートを `@local/starter:2.2.0` に更新
+- インストーラーおよびパッケージ管理スクリプトを v2.2.0 対応に更新
+
+---
+
 ## [2.1.0] - 2026-10-25
 
 ### Added

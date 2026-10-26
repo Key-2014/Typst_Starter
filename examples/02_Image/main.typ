@@ -3,7 +3,7 @@
 // レポートに画像を挿入する方法を示します。
 // figure と image を使って、キャプション付きの画像を配置します。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 #show: report.with(
   title: "画像の挿入例",

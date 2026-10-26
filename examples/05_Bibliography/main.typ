@@ -3,7 +3,7 @@
 // 参考文献の引用方法を示します。
 // BibTeX 形式の .bib ファイルを使って文献管理を行います。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 #show: report.with(
   title: "参考文献の使い方",

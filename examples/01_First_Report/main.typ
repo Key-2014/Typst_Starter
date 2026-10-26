@@ -4,7 +4,7 @@
 // タイトル、著者、学生番号、日付を設定し、
 // 見出しと本文を書くだけのシンプルな構成です。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 // レポートテンプレートを適用
 #show: report.with(

@@ -9,7 +9,7 @@ $InstallerDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Split-Path -Parent $InstallerDir
 $DistDir = Join-Path $RepoRoot "dist"
 $ResourcesDir = Join-Path $InstallerDir "resources"
-$PackageSource = Join-Path $RepoRoot "package\starter\2.1.0"
+$PackageSource = Join-Path $RepoRoot "package\starter\2.2.0"
 $TemplateSource = Join-Path $RepoRoot "project-template"
 
 Write-Host "==================================================" -ForegroundColor Cyan

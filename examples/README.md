@@ -48,10 +48,10 @@ Examples に順番はありますが、**利用順は自由** です。
 
 ## Package について
 
-すべての Examples は Starter Package（`@local/starter:2.1.0`）を利用しています。
+すべての Examples は Starter Package（`@local/starter:2.2.0`）を利用しています。
 
 ```typ
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 ```
 
 Package がインストールされていない場合はコンパイルできません。

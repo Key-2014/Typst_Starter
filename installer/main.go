@@ -13,7 +13,7 @@ import (
 
 func main() {
 	fmt.Println("==================================================")
-	fmt.Println("        Typst Starter Installer v2.1.0            ")
+	fmt.Println("        Typst Starter Installer v2.2.0            ")
 	fmt.Println("==================================================")
 	fmt.Println()
 
@@ -72,19 +72,19 @@ func getTypstPackageDir() (string, error) {
 			}
 			appData = filepath.Join(home, "AppData", "Roaming")
 		}
-		return filepath.Join(appData, "typst", "packages", "local", "starter", "2.1.0"), nil
+		return filepath.Join(appData, "typst", "packages", "local", "starter", "2.2.0"), nil
 	}
 
 	// macOS / Linux
 	if xdgData := os.Getenv("XDG_DATA_HOME") ; xdgData != "" {
-		return filepath.Join(xdgData, "typst", "packages", "local", "starter", "2.1.0"), nil
+		return filepath.Join(xdgData, "typst", "packages", "local", "starter", "2.2.0"), nil
 	}
 
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(home, ".local", "share", "typst", "packages", "local", "starter", "2.1.0"), nil
+	return filepath.Join(home, ".local", "share", "typst", "packages", "local", "starter", "2.2.0"), nil
 }
 
 // 作業用プロジェクトの出力先パスを決定します（ユーザーホーム直下に作成）

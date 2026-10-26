@@ -4,7 +4,7 @@
 // インライン数式、ブロック数式、ナンバリング、
 // 参照の方法を解説します。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 #show: report.with(
   title: "数式の記述例",

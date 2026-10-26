@@ -37,10 +37,10 @@ jobs:
         run: |
           mkdir -p ~/.local/share/typst/packages/local/starter/1.0.0
           mkdir -p ~/.local/share/typst/packages/local/starter/2.0.0
-          mkdir -p ~/.local/share/typst/packages/local/starter/2.1.0
+          mkdir -p ~/.local/share/typst/packages/local/starter/2.2.0
           cp -r package/starter/1.0.0/* ~/.local/share/typst/packages/local/starter/1.0.0/
           cp -r package/starter/2.0.0/* ~/.local/share/typst/packages/local/starter/2.0.0/
-          cp -r package/starter/2.1.0/* ~/.local/share/typst/packages/local/starter/2.1.0/
+          cp -r package/starter/2.2.0/* ~/.local/share/typst/packages/local/starter/2.2.0/
 
 
       - name: Compile all Examples, Learning, and Project Template files

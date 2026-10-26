@@ -3,7 +3,7 @@
 // レポートに表を挿入する方法を示します。
 // table と figure を使って、キャプション付きの表を作成します。
 
-#import "@local/starter:2.1.0": *
+#import "@local/starter:2.2.0": *
 
 #show: report.with(
   title: "表の作成例",
