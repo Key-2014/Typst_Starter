@@ -88,7 +88,7 @@ When releasing `Typst_Starter` version `<StarterVersion>` (e.g., `2.3.0`):
 
 4. **Update Typst_Starter Files to `<StarterVersion>`**:
    - `examples/*/main.typ` & `project-template/main.typ`: `#import "@local/starter:<StarterVersion>": *`
-   - `installer/main.go`: Update banner `v<StarterVersion>` and target path string `"<StarterVersion>"`
+   - `installer/main.go`: Update `const Version = "<StarterVersion>"`
    - `installer/build.ps1`: Update `$PackageSource = Join-Path $RepoRoot "package\starter\<StarterVersion>"`
    - `scripts/install-package.ps1`: Update banner, `$PackageSource`, and `$TypstDataDir` to `<StarterVersion>`
    - `.github/workflows/ci.yml`: Add/update `<StarterVersion>` directory setup

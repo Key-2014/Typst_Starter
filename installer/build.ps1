@@ -21,13 +21,24 @@ Write-Host ""
 Write-Host "[1/3] Preparing embedded resources..." -ForegroundColor Yellow
 $PkgResourceDir = Join-Path $ResourcesDir "package"
 $TplResourceDir = Join-Path $ResourcesDir "template"
+$VarResourceDir = Join-Path $ResourcesDir "variants"
 
 if (Test-Path $ResourcesDir) { Remove-Item -Path $ResourcesDir -Recurse -Force }
 New-Item -ItemType Directory -Path $PkgResourceDir -Force | Out-Null
 New-Item -ItemType Directory -Path $TplResourceDir -Force | Out-Null
+New-Item -ItemType Directory -Path $VarResourceDir -Force | Out-Null
 
 Copy-Item -Path (Join-Path $PackageSource "*") -Destination $PkgResourceDir -Recurse -Force
 Copy-Item -Path (Join-Path $TemplateSource "*") -Destination $TplResourceDir -Recurse -Force
+
+$ThesisSrc = Join-Path $RepoRoot "examples\07_Thesis\main.typ"
+if (Test-Path $ThesisSrc) {
+    Copy-Item -Path $ThesisSrc -Destination (Join-Path $VarResourceDir "thesis.typ") -Force
+}
+$SlideSrc = Join-Path $RepoRoot "examples\06_Slide\main.typ"
+if (Test-Path $SlideSrc) {
+    Copy-Item -Path $SlideSrc -Destination (Join-Path $VarResourceDir "slide.typ") -Force
+}
 Write-Host "      [OK] Resources copied to installer/resources" -ForegroundColor Green
 Write-Host ""
 

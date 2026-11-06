@@ -141,11 +141,53 @@ typst fonts | Select-String "Harano"
 
 ---
 
-## 9. Starter Package 導入（ワンクリック・インストーラー）
+## 9. Starter Package 導入
 
-Starter Package（`@local/starter:2.3.0`）は、**インストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
+Starter Package（`@local/starter:2.3.0`）は、**コマンド 1 行またはインストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
 
-### ① GitHub Releases からインストーラーをダウンロード（推奨）
+### ① コマンドでインストール（推奨・SmartScreen 警告なし）
+
+ターミナルを開き、お使いの環境に合わせて以下のコマンドを 1 行実行します。
+（ブラウザを経由しないため、Windows Defender SmartScreen や macOS Gatekeeper の警告画面が出ません）
+
+**Windows（コマンドプロンプト `cmd` / PowerShell 共通）:**
+```bat
+powershell -NoProfile -ExecutionPolicy Bypass -c "irm https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install.ps1 | iex"
+```
+
+**macOS / Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install.sh | sh
+```
+
+これだけで以下の準備が完了します：
+1. **Package の自動配置**: Typst ローカルパッケージフォルダへ最新版（`2.3.0`）が配置されます。
+2. **作業フォルダの自動作成**: ホーム直下に新規レポートプロジェクト（`My_Typst`）が作成されます（既存フォルダがある場合は重複作成しません）。
+3. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
+
+---
+
+#### 💡 今後のパッケージ更新・新規プロジェクト作成（CLI ツール）
+
+インストール完了後は、ターミナルで `typst-starter` コマンドが使用できます：
+
+- **パッケージのバージョンアップ**:
+  ```bash
+  typst-starter update
+  ```
+  GitHub の最新リリースを自動検知し、パッケージを最新版へ更新します。
+- **新しいプロジェクトフォルダの作成**:
+  ```bash
+  typst-starter init            # 標準レポート (My_Typst)
+  typst-starter init thesis     # 学位論文（卒論・修論）(My_Thesis)
+  typst-starter init slide      # スライド発表 (My_Slide)
+  ```
+
+---
+
+### ② GitHub Releases からインストーラーをダウンロード
+
+ブラウザからインストーラーをダウンロードしてダブルクリックで実行することも可能です：
 
 1. [Releases ページ](https://github.com/Key-2014/Typst_Starter/releases) からお使いの環境に合った最新のインストーラーをダウンロードします：
    - **Windows**: `Typst-Starter-Setup-windows-amd64.exe`
@@ -156,17 +198,28 @@ Starter Package（`@local/starter:2.3.0`）は、**インストーラーを実�
 
 これだけで、以下の 2 つが自動的に完了します：
 1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.3.0\`）へパッケージ一式が自動コピーされます。
-2. **作業フォルダの自動作成**: ユーザーホームディレクトリ（Windows: `C:\Users\{username}\`）直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
+2. **作業フォルダの自動作成**: ユーザーホームディレクトリ直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
 
-> 💡 **追加の環境構築やコマンド操作は不要です。**
-> インストーラー完了後、すぐに `#import "@local/starter:2.3.0": *` が利用可能になります。
-> macOS / Linux で実行する場合は、ターミナルで実行権限を付与して実行してください：
-> ```bash
-> chmod +x Typst-Starter-Setup-*
-> ./Typst-Starter-Setup-*
-> ```
+> ⚠️ **セキュリティ警告が表示された場合の実行手順（初回のみ）**
+> 本インストーラーにはコード署名証明書が付与されていないため、ブラウザからダウンロードした際に OS の保護機能により警告が表示される場合があります。以下の手順で実行してください：
+> - **Windows（Microsoft Defender SmartScreen）**:
+>   「Windows によって PC が保護されました (`Windows protected your PC`)」という青い画面が表示された場合は、画面内の **「詳細情報 (`More info`)」** をクリックし、続けて表示される **「実行 (`Run anyway`)」** ボタンをクリックしてください。
+> - **macOS（Gatekeeper）**:
+>   ブラウザからダウンロードしたバイナリは macOS の検疫属性（Quarantine）によりブロックされるため、ターミナルで検疫属性の解除と実行権限の付与を行ってから起動してください：
+>   ```bash
+>   xattr -d com.apple.quarantine Typst-Starter-Setup-*
+>   chmod +x Typst-Starter-Setup-*
+>   ./Typst-Starter-Setup-*
+>   ```
+>   （※ GUI から許可する場合は、「システム設定」→「プライバシーとセキュリティ」内の **「このまま開く (`Open Anyway`)」** から実行できます）
+> - **Linux**:
+>   ターミナルで実行権限を付与して起動してください：
+>   ```bash
+>   chmod +x Typst-Starter-Setup-*
+>   ./Typst-Starter-Setup-*
+>   ```
 
-### ② その他のインストール方法（スクリプト・手動）
+### ③ その他のインストール方法（スクリプト・手動）
 
 #### PowerShell スクリプトを使用する場合
 リポジトリをクローンまたはダウンロード後、PowerShell で以下を実行してパッケージ配置およびプロジェクト初期化を行えます：
