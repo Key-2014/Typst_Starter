@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	Version   = "2.3.0"
+	Version   = "2.4.0"
 	RepoOwner = "Key-2014"
 	RepoName  = "Typst_Starter"
 )
@@ -102,7 +102,7 @@ func runInstall(cfg Config) {
 		exitWithPause(1, cfg.Silent)
 	}
 
-	fmt.Printf("[1/3] Installing Typst Starter package...\n")
+	fmt.Printf("[1/4] Installing Typst Starter package...\n")
 	fmt.Printf("      Target: %s\n", packageDir)
 
 	if err := extractFS(embeddedPackageFS, "resources/package", packageDir); err != nil {
@@ -112,8 +112,18 @@ func runInstall(cfg Config) {
 	fmt.Println("      [OK] Package installed successfully.")
 	fmt.Println()
 
-	// 2. CLI 自身のインストール & PATH 登録
-	fmt.Printf("[2/3] Setting up typst-starter CLI tool...\n")
+	// 2. VS Code グローバルスニペットの配置
+	fmt.Printf("[2/4] Installing VS Code global snippets...\n")
+	if snippetPath, err := installVSCodeSnippets(); err != nil {
+		fmt.Printf("      [WARNING] Failed to install VS Code snippets: %v\n", err)
+	} else {
+		fmt.Printf("      Target: %s\n", snippetPath)
+		fmt.Println("      [OK] Global snippets installed successfully.")
+	}
+	fmt.Println()
+
+	// 3. CLI 自身のインストール & PATH 登録
+	fmt.Printf("[3/4] Setting up typst-starter CLI tool...\n")
 	if err := installCLI(); err != nil {
 		fmt.Printf("      [WARNING] CLI setup encountered an issue: %v\n", err)
 	} else {
@@ -121,11 +131,11 @@ func runInstall(cfg Config) {
 	}
 	fmt.Println()
 
-	// 3. プロジェクト作成先の決定
+	// 4. プロジェクト作成先の決定
 	if cfg.PackageOnly {
-		fmt.Println("[3/3] Skipping project creation (--package-only specified).")
+		fmt.Println("[4/4] Skipping project creation (--package-only specified).")
 	} else {
-		fmt.Printf("[3/3] Setting up project directory...\n")
+		fmt.Printf("[4/4] Setting up project directory...\n")
 		targetProjectDir, skipped, err := getTargetProjectDir("My_Typst", cfg.CreateProject)
 		if err != nil {
 			fmt.Printf("[ERROR] Failed to determine project directory: %v\n", err)
@@ -346,6 +356,61 @@ func getExpectedAssetName() string {
 	default:
 		return fmt.Sprintf("Typst-Starter-Setup-%s-%s", osName, archName)
 	}
+}
+
+// OS別のVS Codeユーザースニペットディレクトリを返します
+func getVSCodeSnippetsDir() (string, error) {
+	switch runtime.GOOS {
+	case "windows":
+		appData := os.Getenv("APPDATA")
+		if appData == "" {
+			home, err := os.UserHomeDir()
+			if err != nil {
+				return "", err
+			}
+			appData = filepath.Join(home, "AppData", "Roaming")
+		}
+		return filepath.Join(appData, "Code", "User", "snippets"), nil
+	case "darwin":
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return "", err
+		}
+		return filepath.Join(home, "Library", "Application Support", "Code", "User", "snippets"), nil
+	default: // linux 等
+		if xdgConfig := os.Getenv("XDG_CONFIG_HOME"); xdgConfig != "" {
+			return filepath.Join(xdgConfig, "Code", "User", "snippets"), nil
+		}
+		home, err := os.UserHomeDir()
+		if err != nil {
+			return "", err
+		}
+		return filepath.Join(home, ".config", "Code", "User", "snippets"), nil
+	}
+}
+
+// VS Codeグローバルスニペット (typst-starter.code-snippets) を配置します
+func installVSCodeSnippets() (string, error) {
+	snippetsDir, err := getVSCodeSnippetsDir()
+	if err != nil {
+		return "", err
+	}
+
+	if err := os.MkdirAll(snippetsDir, 0755); err != nil {
+		return "", err
+	}
+
+	content, err := embeddedTemplateFS.ReadFile("resources/template/.vscode/typst.code-snippets")
+	if err != nil {
+		return "", fmt.Errorf("failed to read embedded snippets: %w", err)
+	}
+
+	targetFile := filepath.Join(snippetsDir, "typst-starter.code-snippets")
+	if err := os.WriteFile(targetFile, content, 0644); err != nil {
+		return "", fmt.Errorf("failed to write snippets to %s: %w", targetFile, err)
+	}
+
+	return targetFile, nil
 }
 
 // OS別のTypstローカルパッケージディレクトリを返します

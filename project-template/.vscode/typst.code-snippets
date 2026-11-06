@@ -1,12 +1,13 @@
 {
   "Typst_local_init_thesis": {
+    "scope": "typst",
     "prefix": [
       "typ-local-thesis",
       "tlt",
       "typ-thesis",
     ],
     "body": [
-      "#import \"@local/starter:2.3.0\": *",
+      "#import \"@local/starter:2.4.0\": *",
       "",
       "#show: thesis.with(",
       "  title: [${1:title}],",
@@ -39,9 +40,10 @@
       ")",
       "",
     ],
-    "description": "Initialize a new academic thesis with @local/starter:2.3.0 (cover, abstract, toc, chapter-linked numbering)."
+    "description": "Initialize a new academic thesis with @local/starter:2.4.0 (cover, abstract, toc, chapter-linked numbering)."
   },
   "Typst_local_init_report": {
+    "scope": "typst",
     "prefix": [
       "typ-local-report",
       "tlr",
@@ -49,7 +51,7 @@
       "typ-template"
     ],
     "body": [
-      "#import \"@local/starter:2.3.0\": *",
+      "#import \"@local/starter:2.4.0\": *",
       "",
       "#show: report.with(",
       "  title: [${1:title}],",
@@ -62,9 +64,10 @@
       "",
       "$0"
     ],
-    "description": "Initialize a new report document with @local/starter:2.3.0."
+    "description": "Initialize a new report document with @local/starter:2.4.0"
   },
   "Typst_local_init_slide": {
+    "scope": "typst",
     "prefix": [
       "typ-local-slide",
       "tls",
@@ -72,7 +75,7 @@
       "typ-presentation"
     ],
     "body": [
-      "#import \"@local/starter:2.3.0\": *",
+      "#import \"@local/starter:2.4.0\": *",
       "",
       "#show: slides.with(",
       "  title: [${1:Title}],",
@@ -88,9 +91,10 @@
       "",
       "$0",
     ],
-    "description": "Initialize a new slide presentation with @local/starter:2.3.0."
+    "description": "Initialize a new slide presentation with @local/starter:2.4.0"
   },
   "Typst_thesis_appendix": {
+    "scope": "typst",
     "prefix": [
       "typ-appendix"
     ],
@@ -104,6 +108,7 @@
     "description": "Switch numbering to Appendix mode (Appendix A, Eq. (A.1), Fig. A.1, etc.)."
   },
   "Typst_normal_equation_numbering": {
+    "scope": "typst",
     "prefix": "typ-eqnum",
     "body": [
       "#set math.equation(numbering: \"(1)\")",
@@ -112,6 +117,7 @@
     "description": "Enable standard equation numbering, e.g., (1), (2)."
   },
   "Typst_equation_manual_override": {
+    "scope": "typst",
     "prefix": [
       "typ-eq-manual",
       "typ-eq-prefix"
@@ -124,6 +130,7 @@
     "description": "Set a custom equation numbering prefix (e.g., 6.5.1) and reset the counter. Useful for textbook summaries."
   },
   "Typst_equation_counter": {
+    "scope": "typst",
     "prefix": "typ-eq-counter",
     "body": [
       "#counter(math.equation).update(${1:0})",
@@ -131,6 +138,7 @@
     "description": "Update counter of math.equation numbering"
   },
   "Typst_equation_manual_tag": {
+    "scope": "typst",
     "prefix": "typ-eqtag",
     "body": [
       "#eqtag(",
@@ -143,6 +151,7 @@
     "description": "Tag a single equation manually using eqtag() without affecting the global counter."
   },
   "Typst_equation_disable": {
+    "scope": "typst",
     "prefix": [
       "typ-eq-none",
       "typ-eqdelete"
@@ -154,6 +163,7 @@
     "description": "Disable equation numbering from this point forward."
   },
   "Typst_cetz_template": {
+    "scope": "typst",
     "prefix": "typ-cetz",
     "body": [
       "#canvas({",
@@ -172,6 +182,7 @@
     "description": "Insert a CeTZ drawing canvas with a helper grid for coordinate reference."
   },
   "Typst_figure_image": {
+    "scope": "typst",
     "prefix": [
       "typ-png",
       "typ-image",
@@ -188,6 +199,7 @@
     "description": "Insert a figure containing an image with optional caption, label, and sizing."
   },
   "Typst_table_template": {
+    "scope": "typst",
     "prefix": "typ-table",
     "body": [
       "#figure(",
@@ -208,6 +220,7 @@
     "description": "Insert a table wrapped in a figure with headers, content cells, and alignment."
   },
   "Typst_code_block": {
+    "scope": "typst",
     "prefix": "typ-code",
     "body": [
       "#figure(",
@@ -221,6 +234,7 @@
     "description": "Insert a source code block with syntax highlighting, an optional caption, and label."
   },
   "Typst_macro_frect": {
+    "scope": "typst",
     "prefix": "typ-frect",
     "body": [
       "#frect[",
@@ -232,6 +246,7 @@
     "description": "Insert a full-width framed rectangle block using utils.typ macro. Ideal for theorems and definitions."
   },
   "Typst_macro_crect": {
+    "scope": "typst",
     "prefix": "typ-crect",
     "body": [
       "#crect[",
@@ -242,6 +257,7 @@
     "description": "Insert a centered framed rectangle block using utils.typ macro. Ideal for emphasizing important results."
   },
   "Typst_macro_ans": {
+    "scope": "typst",
     "prefix": "typ-ans",
     "body": [
       "#ans[ ${1:Answer content} ]$0"
@@ -249,6 +265,7 @@
     "description": "Insert an answer box with a bottom shadow using utils.typ macro. Designed for final answers."
   },
   "Typst_macro_unit": {
+    "scope": "typst",
     "prefix": "typ-u",
     "body": [
       "#u(\"${1:m/s^2}\")$0"
@@ -256,6 +273,7 @@
     "description": "Format physical units using the u() macro from utils.typ. Supports complex unit strings (e.g., m/s^2)."
   },
   "Typst_bibliography": {
+    "scope": "typst",
     "prefix": "typ-bibliography",
     "body": [
       "#pagebreak()",

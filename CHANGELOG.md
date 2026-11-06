@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.4.0] - 2026-11-06
+
+### Added
+
+- **VS Code グローバルスニペット自動配置機能**
+  - インストーラーおよび `install-package.ps1` 実行時に、VS Code のユーザースニペットフォルダへ専用スニペット（`typst-starter.code-snippets`）を自動配置
+  - プロジェクトフォルダ外や任意のディレクトリで新規 `.typ` ファイルを作成した場合でも、`tlr` (Report), `tlt` (Thesis), `tls` (Slide) などの初期化スニペットや数式・図表スニペットが即座に利用可能
+  - ユーザー独自の `typst.json` を上書きしない専用ファイル名設計
+  - 全スニペットに `"scope": "typst"` を追加し、他言語ファイル編集中におけるスニペットの誤爆を防止
+  - テンプレートからの自動エクスポート処理時に個人情報（氏名・学籍番号・大学名・指導教員名）の完全除去と多重ハードゲート検査を導入
+- **CLI コマンドツール & クイックインストーラー**
+  - コマンドライン 1 行で導入可能な自動インストールスクリプト (`install.ps1`, `install.sh`) を追加（SmartScreen / Gatekeeper 警告を回避可能）
+  - `typst-starter` CLI を自動的にユーザー環境変数 PATH へ登録
+  - `typst-starter update`: 最新リリースへの自動更新コマンド（パッケージとグローバルスニペットを同時に最新化）
+  - `typst-starter init [report|thesis|slide] [name]`: 各種テンプレートの即時初期化コマンド
+
+### Changed
+
+- **Starter Package v2.4.0** (`package/starter/2.4.0/`) への更新
+- すべての Examples (`examples/`) および初期プロジェクトテンプレート (`project-template/`) のインポートを `@local/starter:2.4.0` に更新
+- インストーラーおよびパッケージ管理スクリプトを v2.4.0 対応に更新
+
+---
+
 ## [2.3.0] - 2026-11-06
 
 ### Added

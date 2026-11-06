@@ -21,21 +21,19 @@ This skill automates version upgrades, template exports, and GitHub Releases acr
 
 ## 2. Detailed Procedures
 
-### Scenario A: Bump Typst_Template Version
+### Scenario A: Bump Typst Starter Version
 
-When bumping the local package `@local/typst-template:<OldVersion>` to `<NewVersion>`:
+When updating the local package `@local/starter:<OldVersion>` to `<NewVersion>`:
 
-1. **Locate and Update Version References in `Typst_Template`**:
-   - `typst.toml`: Update `version = "<NewVersion>"`
-   - `lib.typ`: Update header comment `// Package Entrypoint for @local/typst-template:<NewVersion>`
-   - `install-local.ps1`: Update `$PackageVersion = "<NewVersion>"`
-   - `init.ps1`: Update `$PackageVersion = "<NewVersion>"`
-   - `README.md`: Replace all `@local/typst-template:<OldVersion>` with `@local/typst-template:<NewVersion>`
-   - `.vscode/typst.code-snippets`: Update import statements and descriptions to `<NewVersion>`
-   - `init_module/.vscode/typst.code-snippets`: Update import statements and descriptions to `<NewVersion>`
-   - `.github/workflows/compile-typst.yml`: Update step name and `PACKAGE_DIR` version path to `<NewVersion>`
-   - `init_module/.github/workflows/compile-typst.yml`: Update step name and `PACKAGE_DIR` version path to `<NewVersion>`
-   - `examples/*.typ`: Update `#import "@local/typst-template:<NewVersion>": *`
+1. **Locate and Update Version References in `Typst_Starter`**:
+   - `package/starter/<NewVersion>/typst.toml`: Update `version = "<NewVersion>"`
+   - `package/starter/<NewVersion>/lib.typ`: Update header comment `// Package Entrypoint for @local/starter:<NewVersion>`
+   - `scripts/install-package.ps1`: Update `$PackageVersion = "<NewVersion>"`
+   - `installer/main.go`: Update `Version = "<NewVersion>"`
+   - `README.md`: Replace all `@local/starter:<OldVersion>` with `@local/starter:<NewVersion>`
+   - `project-template/.vscode/typst.code-snippets`: Update import statements and descriptions to `<NewVersion>`
+   - `.github/workflows/ci.yml`: Update test paths to `<NewVersion>`
+   - `examples/*/main.typ`: Update `#import "@local/starter:<NewVersion>": *`
 
 2. **Re-register Local Package**:
    ```powershell

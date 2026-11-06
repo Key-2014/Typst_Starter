@@ -143,7 +143,7 @@ typst fonts | Select-String "Harano"
 
 ## 9. Starter Package 導入
 
-Starter Package（`@local/starter:2.3.0`）は、**コマンド 1 行またはインストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
+Starter Package（`@local/starter:2.4.0`）は、**コマンド 1 行またはインストーラーを実行するだけで Typst のローカルパッケージフォルダへ自動配置されます**。ユーザー自身でのファイルコピーや環境設定は一切不要です。
 
 ### ① コマンドでインストール（推奨・SmartScreen 警告なし）
 
@@ -161,9 +161,10 @@ curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install
 ```
 
 これだけで以下の準備が完了します：
-1. **Package の自動配置**: Typst ローカルパッケージフォルダへ最新版（`2.3.0`）が配置されます。
-2. **作業フォルダの自動作成**: ホーム直下に新規レポートプロジェクト（`My_Typst`）が作成されます（既存フォルダがある場合は重複作成しません）。
-3. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
+1. **Package の自動配置**: Typst ローカルパッケージフォルダへ最新版（`2.4.0`）が配置されます。
+2. **VS Code グローバルスニペットの自動配置**: VS Code ユーザースニペットフォルダへ専用スニペット（`typst-starter.code-snippets`）が自動配置され、どのフォルダでも `tlr`, `tlt`, `tls` などのスニペットが直ちに利用可能になります。
+3. **作業フォルダの自動作成**: ホーム直下に新規レポートプロジェクト（`My_Typst`）が作成されます（既存フォルダがある場合は重複作成しません）。
+4. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
 
 ---
 
@@ -196,9 +197,11 @@ curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install
    - **Linux**: `Typst-Starter-Setup-linux-amd64`
 2. ダウンロードした実行ファイルを起動します（Windows では**ダブルクリックで実行**）。
 
-これだけで、以下の 2 つが自動的に完了します：
-1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.3.0\`）へパッケージ一式が自動コピーされます。
-2. **作業フォルダの自動作成**: ユーザーホームディレクトリ直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
+これだけで、以下のセットアップが自動的に完了します：
+1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.4.0\`）へパッケージ一式が自動コピーされます。
+2. **VS Code グローバルスニペットの自動配置**: VS Code ユーザースニペットフォルダへ専用スニペット（`typst-starter.code-snippets`）が自動配置されます。
+3. **作業フォルダの自動作成**: ユーザーホームディレクトリ直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
+4. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
 
 > ⚠️ **セキュリティ警告が表示された場合の実行手順（初回のみ）**
 > 本インストーラーにはコード署名証明書が付与されていないため、ブラウザからダウンロードした際に OS の保護機能により警告が表示される場合があります。以下の手順で実行してください：
@@ -233,17 +236,17 @@ curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install
 ```
 
 #### 手動配置の場合
-`package/starter/2.3.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
+`package/starter/2.4.0/` フォルダを手動で各 OS のローカルパッケージディレクトリに配置してください：
 
-- **Windows**: `%APPDATA%\typst\packages\local\starter\2.3.0\`
-- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/2.3.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/2.3.0/`）
+- **Windows**: `%APPDATA%\typst\packages\local\starter\2.4.0\`
+- **macOS / Linux**: `~/.local/share/typst/packages/local/starter/2.4.0/`（または `$XDG_DATA_HOME/typst/packages/local/starter/2.4.0/`）
 
 ### インストール確認
 
 VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` ファイルを作成して以下を記述し、エラーが出なければ成功です：
 
 ```typ
-#import "@local/starter:2.3.0": *
+#import "@local/starter:2.4.0": *
 ```
 
 ---
@@ -261,7 +264,7 @@ VSCode で作成された `My_Typst/main.typ` を開くか、新しい `.typ` �
 `main.typ` を開き、内容を編集します：
 
 ```typ
-#import "@local/starter:2.3.0": *
+#import "@local/starter:2.4.0": *
 
 #show: report.with(
   title: "物理学実験レポート",
