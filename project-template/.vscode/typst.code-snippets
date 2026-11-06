@@ -6,7 +6,7 @@
       "typ-thesis",
     ],
     "body": [
-      "#import \"@local/starter:2.2.0\": *",
+      "#import \"@local/starter:2.3.0\": *",
       "",
       "#show: thesis.with(",
       "  title: [${1:title}],",
@@ -39,7 +39,7 @@
       ")",
       "",
     ],
-    "description": "Initialize a new academic thesis with @local/starter:2.2.0 (cover, abstract, toc, chapter-linked numbering)."
+    "description": "Initialize a new academic thesis with @local/starter:2.3.0 (cover, abstract, toc, chapter-linked numbering)."
   },
   "Typst_local_init_report": {
     "prefix": [
@@ -49,7 +49,7 @@
       "typ-template"
     ],
     "body": [
-      "#import \"@local/starter:2.2.0\": *",
+      "#import \"@local/starter:2.3.0\": *",
       "",
       "#show: report.with(",
       "  title: [${1:title}],",
@@ -62,7 +62,7 @@
       "",
       "$0"
     ],
-    "description": "Initialize a new report document with @local/starter:2.2.0."
+    "description": "Initialize a new report document with @local/starter:2.3.0."
   },
   "Typst_local_init_slide": {
     "prefix": [
@@ -72,7 +72,7 @@
       "typ-presentation"
     ],
     "body": [
-      "#import \"@local/starter:2.2.0\": *",
+      "#import \"@local/starter:2.3.0\": *",
       "",
       "#show: slides.with(",
       "  title: [${1:Title}],",
@@ -88,7 +88,7 @@
       "",
       "$0",
     ],
-    "description": "Initialize a new slide presentation with @local/starter:2.2.0."
+    "description": "Initialize a new slide presentation with @local/starter:2.3.0."
   },
   "Typst_thesis_appendix": {
     "prefix": [
