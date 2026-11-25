@@ -1,4 +1,4 @@
-param (
+﻿param (
     [string]$GoPath = "go"
 )
 
@@ -22,14 +22,27 @@ Write-Host "[1/3] Preparing embedded resources..." -ForegroundColor Yellow
 $PkgResourceDir = Join-Path $ResourcesDir "package"
 $TplResourceDir = Join-Path $ResourcesDir "template"
 $VarResourceDir = Join-Path $ResourcesDir "variants"
+$SnippetsResourceDir = Join-Path $ResourcesDir "snippets"
 
 if (Test-Path $ResourcesDir) { Remove-Item -Path $ResourcesDir -Recurse -Force }
 New-Item -ItemType Directory -Path $PkgResourceDir -Force | Out-Null
 New-Item -ItemType Directory -Path $TplResourceDir -Force | Out-Null
 New-Item -ItemType Directory -Path $VarResourceDir -Force | Out-Null
+New-Item -ItemType Directory -Path $SnippetsResourceDir -Force | Out-Null
 
 Copy-Item -Path (Join-Path $PackageSource "*") -Destination $PkgResourceDir -Recurse -Force
 Copy-Item -Path (Join-Path $TemplateSource "*") -Destination $TplResourceDir -Recurse -Force
+
+$SnippetSrc = Join-Path $TemplateSource ".vscode\typst.code-snippets"
+if (-not (Test-Path $SnippetSrc)) {
+    throw "Required snippet source not found: $SnippetSrc"
+}
+Copy-Item -Path $SnippetSrc -Destination (Join-Path $SnippetsResourceDir "typst-starter.code-snippets") -Force
+
+$TplWorkspaceSnippet = Join-Path $TplResourceDir ".vscode\typst.code-snippets"
+if (Test-Path $TplWorkspaceSnippet) {
+    Remove-Item -Path $TplWorkspaceSnippet -Force
+}
 
 $ThesisSrc = Join-Path $RepoRoot "examples\07_Thesis\main.typ"
 if (Test-Path $ThesisSrc) {

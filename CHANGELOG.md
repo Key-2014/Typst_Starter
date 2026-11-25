@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.4.1] - 2026-11-25
+
+### Added
+
+- **マルチエディタ自動検出によるグローバルスニペット & 設定の自動反映 (`installer/editors.go`, `scripts/install-package.ps1`)**
+  - `Antigravity IDE` / `Antigravity` / `Code` / `Code - Insiders` / `Cursor` / `Windsurf` / `VSCodium` の各ユーザー設定ディレクトリを Windows / macOS / Linux で自動検出し（未検出時は `Code` へフォールバック）、`typst-starter.code-snippets` の配置と `[typst].editor.quickSuggestions.strings = true` の非破壊マージを実施
+- **既存 `My_Typst` の `.vscode` / `.gitignore` 冪等同期と旧ワークスペーススニペット整理**
+  - インストーラー（`.exe`）通常実行時および `typst-starter update`（`--package-only`）実行時に、既存の `~/My_Typst` 内の `main.typ` やカスタムスニペット・JSONC コメントを保護したまま、`.vscode/settings.json` と `.gitignore`（`*.pdf`）を重複なく同期
+  - 既存の `My_Typst/.vscode/typst.code-snippets` が残っている場合は重複補完防止のため自動削除
+- **Go 単体テストスイートの追加 (`installer/editors_test.go`)**
+  - マルチエディタ検出、JSON / `.gitignore` の冪等マージ、JSONC 保護、埋め込みテンプレートからのワークスペーススニペット除外、`PackageVersion` と `typst.toml` の整合性を検証
+
+### Changed
+
+- **グローバルスニペットへの一本化 (`installer/build.ps1`, `installer/embed.go`, `scripts/install-package.ps1`)**
+  - 新規 `My_Typst` および `typst-starter init` 生成フォルダの `.vscode/` には `typst.code-snippets` を展開しない構成に変更し、候補の二重表示を解消
+- **インストーラー / CLI バージョン (`v2.4.1`) とパッケージバージョン (`@local/starter:2.4.0`) の分離 (`installer/main.go`)**
+- **`README.md` および `scripts/README.md` の更新** — マルチエディタ対応と既存 `My_Typst` 設定同期の説明を反映
+
+---
+
 ## [2.4.0] - 2026-11-06
 
 ### Added

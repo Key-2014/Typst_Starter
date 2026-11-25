@@ -46,7 +46,8 @@ powershell -ExecutionPolicy Bypass -File scripts\install-package.ps1 -CreateProj
 
 1. `package/starter/2.4.0/` の全ファイルを
 2. `%APPDATA%\typst\packages\local\starter\2.4.0\`（macOS/Linux では `~/.local/share/typst/packages/local/starter/2.4.0/`）にコピーします
-3. `-CreateProject` を指定した場合は、ユーザーホーム直下に `My_Typst` プロジェクトフォルダを初期化します
+3. 検出されたエディタ（VS Code / Cursor / Antigravity / Windsurf / VSCodium 等）のユーザー設定フォルダへ、グローバルスニペット（`typst-starter.code-snippets`）と `[typst]` 推奨設定（非破壊マージ）を配置します
+4. 既存の `My_Typst` がある場合はユーザーファイルを保持したまま `.vscode/settings.json`・`.gitignore` の同期と旧版ワークスペーススニペット削除を行い、`-CreateProject` を指定した場合はユーザーホーム直下に新規プロジェクトフォルダを初期化します
 
 ### インストール先（Windows）
 

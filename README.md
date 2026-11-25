@@ -162,8 +162,8 @@ curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install
 
 これだけで以下の準備が完了します：
 1. **Package の自動配置**: Typst ローカルパッケージフォルダへ最新版（`2.4.0`）が配置されます。
-2. **VS Code グローバルスニペットの自動配置**: VS Code ユーザースニペットフォルダへ専用スニペット（`typst-starter.code-snippets`）が自動配置され、どのフォルダでも `tlr`, `tlt`, `tls` などのスニペットが直ちに利用可能になります。
-3. **作業フォルダの自動作成**: ホーム直下に新規レポートプロジェクト（`My_Typst`）が作成されます（既存フォルダがある場合は重複作成しません）。
+2. **エディタ横断のグローバルスニペット & 設定の自動反映**: VS Code・Cursor・Antigravity・Windsurf・VSCodium 等を自動検出し、専用スニペット（`typst-starter.code-snippets`）と `[typst]` 推奨設定（重複しない場合のみ安全にマージ）を配置するため、どのフォルダでも `tlr`, `tlt`, `tls` などが直ちに利用可能になります。
+3. **作業フォルダの自動作成・設定同期**: ホーム直下に新規レポートプロジェクト（`My_Typst`）が作成されます（既に存在する場合は `main.typ` 等は保持したまま、`.vscode/settings.json`・`.gitignore` を非破壊で最新化し、旧版のワークスペーススニペットがあれば削除します）。
 4. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
 
 ---
@@ -199,8 +199,8 @@ curl -fsSL https://raw.githubusercontent.com/Key-2014/Typst_Starter/main/install
 
 これだけで、以下のセットアップが自動的に完了します：
 1. **Package の自動配置**: Typst のローカルパッケージディレクトリ（Windows: `%APPDATA%\typst\packages\local\starter\2.4.0\`）へパッケージ一式が自動コピーされます。
-2. **VS Code グローバルスニペットの自動配置**: VS Code ユーザースニペットフォルダへ専用スニペット（`typst-starter.code-snippets`）が自動配置されます。
-3. **作業フォルダの自動作成**: ユーザーホームディレクトリ直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます。
+2. **エディタ横断のグローバルスニペット & 設定の自動反映**: VS Code・Cursor・Antigravity・Windsurf・VSCodium 等を自動検出し、専用スニペット（`typst-starter.code-snippets`）と `[typst]` 推奨設定（非破壊マージ）を自動配置します。
+3. **作業フォルダの自動作成・設定同期**: ユーザーホームディレクトリ直下に新規レポートプロジェクトフォルダ（`My_Typst`）が作成されます（既に存在する場合は `main.typ` 等を保護しつつ、`.vscode/settings.json`・`.gitignore` を安全に同期し、旧版のワークスペーススニペットを削除します）。
 4. **CLI コマンドの登録**: ターミナルから `typst-starter` コマンドが利用可能になります。
 
 > ⚠️ **セキュリティ警告が表示された場合の実行手順（初回のみ）**

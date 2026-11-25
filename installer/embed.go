@@ -10,3 +10,6 @@ var embeddedTemplateFS embed.FS
 
 //go:embed all:resources/variants
 var embeddedVariantsFS embed.FS
+
+//go:embed resources/snippets/typst-starter.code-snippets
+var embeddedSnippetsBytes []byte
